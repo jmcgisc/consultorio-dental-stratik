@@ -43,7 +43,7 @@ function Item({ id, title, short, bullets = [], desde, duracion, incluye = [], o
             <a href="/#agendar" className="btn btn-primary">Agendar</a>
             <a
               className="btn"
-              href={`https://wa.me/521000000000?text=Hola,%20quiero%20informes%20sobre%20${encodeURIComponent(title)}`}
+              href={`https://wa.me/5215560910802?text=Hola,%20quiero%20informes%20sobre%20${encodeURIComponent(title)}`}
               target="_blank" rel="noreferrer"
             >
               WhatsApp

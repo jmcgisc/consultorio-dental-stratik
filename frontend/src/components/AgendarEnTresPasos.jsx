@@ -65,7 +65,7 @@ export default function AgendarEnTresPasos() {
               <input
                 name="telefono" required inputMode="tel" pattern="[0-9+() -]{8,}"
                 className="mt-1 w-full rounded-xl border border-neutral-300 dark:border-neutral-700 bg-transparent px-3 py-2 outline-none focus:ring-2 focus:ring-brand-300"
-                placeholder="+52 55 3456 6891"
+                placeholder="+52 55 5577 0687"
               />
             </div>
             <div className="sm:col-span-2">
@@ -126,7 +126,7 @@ export default function AgendarEnTresPasos() {
           {/* Tip: botón alterno de WhatsApp prellenado */}
           <a
             className="btn mt-3 w-full"
-            href={`https://wa.me/521000000000?text=${encodeURIComponent("Hola, quiero agendar una cita en la clínica dental.")}`}
+            href={`https://wa.me/5215560910802?text=${encodeURIComponent("Hola, quiero agendar una cita en la clínica dental.")}`}
             target="_blank" rel="noreferrer"
           >
             Prefiero confirmar por WhatsApp
@@ -144,7 +144,7 @@ export default function AgendarEnTresPasos() {
           </ul>
 
           <div className="mt-6 grid grid-cols-2 gap-3">
-            <a className="btn w-full" href="tel:+525534566891">Llamar</a>
+            <a className="btn w-full" href="tel:+525555770687">Llamar</a>
             <a className="btn w-full" href="https://maps.google.com" target="_blank" rel="noreferrer">Cómo llegar</a>
           </div>
 

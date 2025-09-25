@@ -111,7 +111,7 @@ export default function HeroVideoDentista() {
             <Link to="/citas" className="btn btn-primary">Agendar cita</Link>
             <a
               className="btn btn-ghost"
-              href="https://wa.me/5215534566891?text=Quiero%20agendar%20una%20cita"
+              href="https://wa.me/5215560910802?text=Quiero%20agendar%20una%20cita"
               target="_blank" rel="noreferrer"
             >
               WhatsApp

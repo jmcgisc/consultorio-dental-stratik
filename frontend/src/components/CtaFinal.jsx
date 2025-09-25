@@ -14,7 +14,7 @@ export default function CtaFinal() {
           <Link to="/citas" className="btn btn-primary">Agendar ahora</Link>
           <a
             className="btn"
-            href="tel:+52 55 3456 6891"
+            href="tel:+52 55 5577 0687"
             aria-label="Llamar a la clínica"
           >
             Llamar

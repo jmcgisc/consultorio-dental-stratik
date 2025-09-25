@@ -1,7 +1,7 @@
 export default function FloatingWhatsApp() {
   return (
     <a
-      href="https://wa.me/5215534566891?text=Hola,%20quiero%20agendar%20una%20cita"
+      href="https://wa.me/5215560910802?text=Hola,%20quiero%20agendar%20una%20cita"
       target="_blank" rel="noreferrer"
       className="fixed bottom-5 right-5 inline-flex items-center justify-center h-12 w-12 rounded-full shadow-md bg-green-500 text-white"
       aria-label="WhatsApp"
