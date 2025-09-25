@@ -103,7 +103,7 @@ export default function HeroVideoDentista() {
             Tu sonrisa, <span className="text-brand-600">en manos expertas</span>
           </h1>
 
-          <p className="mt-5 text-lg text-neutral-800/90 dark:text-neutral-100">
+          <p className="mt-5 text-lg rounded-2xl text-brand-800 bg-gradient-to-b from-brand-50/50 to-transparent  dark:text-gray-300">
             Odontología integral con tecnología de punta y trato humano. Agenda en minutos y recibe recordatorios automáticos.
           </p>
 
@@ -111,19 +111,42 @@ export default function HeroVideoDentista() {
             <Link to="/citas" className="btn btn-primary">Agendar cita</Link>
             <a
               className="btn btn-ghost"
-              href="https://wa.me/521000000000?text=Quiero%20agendar%20una%20cita"
+              href="https://wa.me/5215534566891?text=Quiero%20agendar%20una%20cita"
               target="_blank" rel="noreferrer"
             >
               WhatsApp
             </a>
-            <a className="btn" href="/#servicios">Ver servicios</a>
+            <a 
+              className="group relative overflow-hidden bg-transparent text-blue-700 border-2 border-blue-200 px-6 py-4 rounded-2xl font-semibold hover:bg-blue-50 hover:border-blue-300 transform hover:scale-105 transition-all duration-300 flex items-center gap-2"
+              href="/#servicios"
+            >
+              <span>Ver servicios</span>
+              <span className="group-hover:translate-x-1 transition-transform">→</span>
+            </a>
           </div>
 
-          <ul className="mt-6 flex flex-wrap gap-x-6 gap-y-2 text-sm text-neutral-800/90 dark:text-neutral-200">
-            <li>✓ Citas el mismo día</li>
-            <li>✓ Aceptamos tarjetas</li>
-            <li>✓ Estacionamiento</li>
-          </ul>
+         
+          {/* Lista de beneficios mejorada */}
+          <div className="mt-12 grid grid-cols-1 sm:grid-cols-3 gap-6 max-w-24xl">
+            {[
+              { icon: '⚡', text: 'Citas el mismo día', subtext: 'Disponibilidad inmediata' },
+              { icon: '💳', text: 'Aceptamos tarjetas', subtext: 'Hasta 12 meses sin intereses' },
+              { icon: '🅿️', text: 'Parking accesible', subtext: 'Comodidad garantizada' }
+            ].map((benefit, index) => (
+              <div 
+                key={index}
+                className="bg-white/80 backdrop-blur-sm rounded-2xl p-4 border border-white/20 shadow-lg hover:shadow-xl transition-all duration-300 hover:transform hover:-translate-y-1"
+              >
+                <div className="flex items-center gap-3">
+                  <span className="text-2xl">{benefit.icon}</span>
+                  <div>
+                    <div className="font-semibold text-gray-900">{benefit.text}</div>
+                    <div className="text-sm text-gray-600">{benefit.subtext}</div>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </section>
