@@ -98,7 +98,7 @@ export default function AgendarSection() {
 
           <div className="mt-8 text-sm text-neutral-600 dark:text-neutral-300">
             ¿Prefieres hablar?{" "}
-            <a className="underline" href="tel:+525500000000">Llámanos</a> o escríbenos por{" "}
+            <a className="underline" href="tel:+52 55 3456 6891">Llámanos</a> o escríbenos por{" "}
             <a
               className="underline"
               target="_blank" rel="noreferrer"
@@ -141,7 +141,7 @@ export default function AgendarSection() {
               <input
                 name="telefono"
                 inputMode="tel"
-                placeholder="55 0000 0000"
+                placeholder="+52 55 3456 6891"
                 required
                 className="mt-1 w-full rounded-xl border border-neutral-300 dark:border-neutral-700 bg-transparent px-3 py-2 outline-none focus:ring-2 focus:ring-brand-300"
               />

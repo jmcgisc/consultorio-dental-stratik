@@ -65,7 +65,7 @@ export default function AgendarEnTresPasos() {
               <input
                 name="telefono" required inputMode="tel" pattern="[0-9+() -]{8,}"
                 className="mt-1 w-full rounded-xl border border-neutral-300 dark:border-neutral-700 bg-transparent px-3 py-2 outline-none focus:ring-2 focus:ring-brand-300"
-                placeholder="55 0000 0000"
+                placeholder="+52 55 3456 6891"
               />
             </div>
             <div className="sm:col-span-2">
@@ -144,7 +144,7 @@ export default function AgendarEnTresPasos() {
           </ul>
 
           <div className="mt-6 grid grid-cols-2 gap-3">
-            <a className="btn w-full" href="tel:+525500000000">Llamar</a>
+            <a className="btn w-full" href="tel:+525534566891">Llamar</a>
             <a className="btn w-full" href="https://maps.google.com" target="_blank" rel="noreferrer">Cómo llegar</a>
           </div>
 
