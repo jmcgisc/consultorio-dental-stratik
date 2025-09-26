@@ -114,7 +114,7 @@ export default function Footer() {
                 <div>
                   <div className="font-semibold text-neutral-700 dark:text-neutral-300">WhatsApp</div>
                   <a href="https://wa.me/521000000000" className="text-sm text-green-600 dark:text-green-400 hover:underline">
-                    +52 1 55 6091 0802
+                    +52 55 5577 0687
                   </a>
                 </div>
               </div>
@@ -164,7 +164,17 @@ export default function Footer() {
                 ))}
               </div>
             </div>
-          </div>
+            
+          </div>  
+          
+          <div className="flex items-center gap-2 text-sm text-neutral-500 dark:text-neutral-500">
+                <span>Desarrollado con</span>
+                <span className="text-red-500">❤️</span>
+                <span>por</span>
+                <a href="https://stratik.com.mx" className="font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+                  Stratik
+                </a>
+              </div>
         </div>
 
         {/* Bottom Bar */}
@@ -172,7 +182,7 @@ export default function Footer() {
           <div className="container-px py-8">
             <div className="flex flex-col lg:flex-row items-center justify-between gap-4">
               <div className="flex items-center gap-6 text-sm text-neutral-600 dark:text-neutral-400">
-                <span>© {year} Clínica Dental Premium. Todos los derechos reservados.</span>
+                <span>© {year} Especialistas en Salud Bucal. Todos los derechos reservados.</span>
                 <div className="hidden md:flex items-center gap-4">
                   <a href="/politica-privacidad" className="hover:text-blue-600 transition-colors">Privacidad</a>
                   <a href="/terminos-servicio" className="hover:text-blue-600 transition-colors">Términos</a>
@@ -184,9 +194,9 @@ export default function Footer() {
                 <span>Desarrollado con</span>
                 <span className="text-red-500">❤️</span>
                 <span>por</span>
-                <span className="font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+                <a href="https://stratik.com.mx" className="font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
                   Stratik
-                </span>
+                </a>
               </div>
             </div>
           </div>

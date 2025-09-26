@@ -12,12 +12,15 @@ import Servicios from "./pages/Servicios.jsx"
 import Privacidad from "./pages/Privacidad.jsx"      // ← nuevo
 import Terminos from "./pages/Terminos.jsx"          // ← nuevo
 import NotFound from "./pages/NotFound.jsx"
+import TrustStrip from "./components/TrustStrip.jsx" 
 
 export default function App() {
   useHashScroll()
   return (
     <div className="min-h-screen flex flex-col">
-      <Navbar />      <PromoBanner />   {/* ← banner superior */}
+      <Navbar />      
+      <TrustStrip />   {/* ← aquí */}
+      <PromoBanner />   {/* ← banner superior */} 
 
       <main className="flex-1">
         <Routes>
