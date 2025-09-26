@@ -13,6 +13,8 @@ import Privacidad from "./pages/Privacidad.jsx"      // ← nuevo
 import Terminos from "./pages/Terminos.jsx"          // ← nuevo
 import NotFound from "./pages/NotFound.jsx"
 import TrustStrip from "./components/TrustStrip.jsx" 
+import ServicioDetalle from "./pages/ServicioDetalle.jsx"
+
 
 export default function App() {
   useHashScroll()
@@ -31,6 +33,7 @@ export default function App() {
           <Route path="/politica-privacidad" element={<Privacidad />} />
           <Route path="/terminos-servicio" element={<Terminos />} />
           <Route path="*" element={<NotFound />} />
+          <Route path="/servicios/:slug" element={<ServicioDetalle />} />
         </Routes>
       </main>
       <Footer />

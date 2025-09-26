@@ -10,8 +10,8 @@ import FaqAccordion from "../components/FaqAccordion.jsx"
 import CtaFinal from "../components/CtaFinal.jsx"
 import FloatingWhatsApp from "../components/FloatingWhatsApp.jsx"
 import SeoJsonLd from "../components/SeoJsonLd.jsx"
-import QueNecesitasHoy from "../components/QueNecesitasHoy.jsx"       // ← nuevo
-import FinanciacionWidget from "../components/FinanciacionWidget.jsx" // ← nuevo
+import QueNecesitasHoy from "../components/QueNecesitasHoy.jsx"        
+import FinanciacionWidget from "../components/FinanciacionWidget.jsx"  
 
 
 export default function Home() {
@@ -20,9 +20,9 @@ export default function Home() {
       <SeoJsonLd />
       <HeroVideoDentista />
       <ServiciosGrid />
-      <QueNecesitasHoy />        {/* ← nuevo */}
+      <QueNecesitasHoy />       
       <AntesDespuesSection />
-      <FinanciacionWidget />     {/* ← nuevo */}
+      <FinanciacionWidget />    
       <AgendarSection />
       <Testimonios />
       <UbicacionMapa />

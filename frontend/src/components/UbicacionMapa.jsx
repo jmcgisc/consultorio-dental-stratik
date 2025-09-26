@@ -2,7 +2,7 @@ export default function UbicacionMapa() {
   return (
     <section id="ubicacion" className="container-px py-16">
       <h2 className="text-3xl font-bold">Ubicación y horario</h2>
-      <p className="mt-2 text-neutral-600 dark:text-neutral-300">
+      <p className="mt-2 text-blue-800 dark:text-neutral-200">
         Joyas 120, letra C, col. Estrella, Gustavo A. Madero, 07810 Ciudad de México, CDMX • Esquina con Calle Turquesa
       </p>
 
