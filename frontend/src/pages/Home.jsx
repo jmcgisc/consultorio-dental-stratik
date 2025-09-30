@@ -22,7 +22,7 @@ export default function Home() {
       <ServiciosGrid />
       <QueNecesitasHoy />       
       <AntesDespuesSection />
-      <FinanciacionWidget />    
+      {/* <FinanciacionWidget />     */}
       <AgendarSection />
       <Testimonios />
       <UbicacionMapa />

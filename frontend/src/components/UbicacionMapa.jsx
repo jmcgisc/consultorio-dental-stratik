@@ -8,21 +8,21 @@ export default function UbicacionMapa() {
 
       <div className="mt-8 grid gap-6 lg:grid-cols-2">
         <div className="card">
-          <p className="font-semibold">Cómo llegar</p>
-          <ul className="mt-3 space-y-2 text-sm text-neutral-700 dark:text-neutral-200">
+          <p className="font-semibold dark:text-neutral-400">Cómo llegar</p>
+          <ul className="mt-3 space-y-2 text-sm text-neutral-700 dark:text-neutral-600">
             <li>🛝 Frente al parque de los cocodrilos”.</li>
             <li>🅿️ Estacionamiento accesible.</li>
             <li>♿ Accesibilidad para silla de ruedas.</li>
           </ul>
 
           <div className="mt-6">
-            <p className="font-semibold">Horario</p>
-            <p className="mt-2 text-sm text-neutral-700 dark:text-neutral-200">
+            <p className="font-semibold dark:text-neutral-400">Horario</p>
+            <p className="mt-2 text-sm text-neutral-700 dark:text-neutral-600">
               Lun–Vie 10:00–19:00 · Sáb 9:00–18:00· Dom 11:00–17:00
             </p>
           </div>
 
-          <div className="mt-6 flex flex-wrap gap-3">
+          <div className="mt-6 flex flex-wrap gap-3 dark:text-neutral-500">
             <a className="btn" href="tel:+52 55 5577 0687">Llamar</a>
             <a
               className="btn"

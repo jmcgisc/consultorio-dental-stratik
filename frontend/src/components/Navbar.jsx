@@ -7,7 +7,9 @@ export default function Navbar() {
   const [scrolled, setScrolled] = useState(false)
   const [mobileOpen, setMobileOpen] = useState(false)
   const [servicesOpen, setServicesOpen] = useState(false)
+  const [closeTimeout, setCloseTimeout] = useState(null)
   const dropdownRef = useRef(null)
+  const dropdownContentRef = useRef(null)
 
   // Efecto scroll con gradiente
   useEffect(() => {
@@ -39,6 +41,37 @@ export default function Navbar() {
     }
   }, [])
 
+  // MEJORA: Manejo mejorado del hover con delays más largos
+  const handleMouseEnter = () => {
+    if (closeTimeout) {
+      clearTimeout(closeTimeout)
+      setCloseTimeout(null)
+    }
+    setServicesOpen(true)
+  }
+
+  const handleMouseLeave = () => {
+    const timeout = setTimeout(() => {
+      setServicesOpen(false)
+    }, 500) // Aumentado a 500ms para dar más tiempo
+    setCloseTimeout(timeout)
+  }
+
+  // MEJORA: Prevenir cierre cuando el mouse está en el dropdown
+  const handleDropdownEnter = () => {
+    if (closeTimeout) {
+      clearTimeout(closeTimeout)
+      setCloseTimeout(null)
+    }
+  }
+
+  const handleDropdownLeave = () => {
+    const timeout = setTimeout(() => {
+      setServicesOpen(false)
+    }, 300) // Delay reducido para salida del dropdown
+    setCloseTimeout(timeout)
+  }
+
   // Estilos originales mejorados
   const linkBase = 'px-4 py-3 rounded-xl text-sm font-medium transition-all duration-300'
   const isHome = location.pathname === '/'
@@ -49,10 +82,10 @@ export default function Navbar() {
 
   const anchors = {
     servicios: "/#servicios",
-    limpieza: "/#servicio-limpieza",
-    ortodoncia: "/#servicio-ortodoncia",
-    resinas: "/#servicio-resinas",
-    implantes: "/#servicio-implantes",
+    limpieza: "/servicios/limpieza",
+    ortodoncia: "/servicios/ortodoncia",
+    resinas: "/servicios/resinas",
+    implantes: "/servicios/implantes",
     antesDespues: "/#antes-despues",
     agendar: "/#agendar",
     testimonios: "/#testimonios",
@@ -102,51 +135,78 @@ export default function Navbar() {
           {/* Desktop Navigation con más espacio entre enlaces */}
           <div className="hidden lg:flex items-center gap-6 text-brand-600" ref={dropdownRef}>
             
-            {/* Dropdown Servicios - CON PUNTOS DE COLORES */}
+            {/* Dropdown Servicios - MEJORADO CON DELAY Y ÁREA MÁS GRANDE */}
             <div
               className="relative"
-              onMouseEnter={() => setServicesOpen(true)}
-              onMouseLeave={() => setServicesOpen(false)}
+              onMouseEnter={handleMouseEnter}
+              onMouseLeave={handleMouseLeave}
             >
               <button
                 onClick={() => setServicesOpen(v => !v)}
-                className={`${link(false)} flex items-center gap-1' ${
-                  servicesOpen ? 'bg-brand-600 dark:bg-neutral-800 text-brand-600' : ''
+                className={`${link(false)} flex items-center gap-1 ${
+                  servicesOpen ? 'bg-brand-50 dark:bg-neutral-800 text-brand-600' : ''
                 }`}
                 aria-haspopup="menu"
                 aria-expanded={servicesOpen}
               >
-                <span className="text-brand-600'">Servicios</span>
+                <span>Servicios</span>
                 <span className={`transform transition-transform duration-300 ${
                   servicesOpen ? 'rotate-180' : ''
                 }`}>▼</span>
               </button>
 
               {servicesOpen && (
-                <div className="absolute left-0 mt-2 w-64 rounded-2xl border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-900 shadow-lg p-3 animate-in fade-in-0 zoom-in-95">
-                  <div className="space-y-1">
-                    <a className="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-blue-50 text-neutral-700 dark:text-neutral-300 hover:text-blue-600 transition-all group" 
-                       href={anchors.servicios}>
+                <div 
+                  className="absolute left-0 mt-2 w-64 rounded-2xl border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-900 shadow-lg p-3 animate-in fade-in-0 zoom-in-95"
+                  ref={dropdownContentRef}
+                  onMouseEnter={handleDropdownEnter}
+                  onMouseLeave={handleDropdownLeave}
+                  style={{
+                    // MEJORA: Añadir margen superior para crear espacio entre botón y dropdown
+                    marginTop: '8px'
+                  }}
+                >
+                  {/* MEJORA: Triángulo decorativo para conectar visualmente */}
+                  <div className="absolute -top-2 left-6 w-4 h-4 bg-white dark:bg-neutral-900 border-t border-l border-neutral-200 dark:border-neutral-800 transform rotate-45"></div>
+                  
+                  <div className="relative space-y-1 z-10">
+                    <a 
+                      className="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-blue-50 dark:hover:bg-blue-900/20 text-neutral-700 dark:text-neutral-300 hover:text-blue-600 transition-all group" 
+                      href={anchors.servicios}
+                      onClick={() => setServicesOpen(false)}
+                    >
                       <span className="w-2 h-2 bg-blue-500 rounded-full"></span>
                       <span>Vista general</span>
                     </a>
-                    <a className="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-blue-50 text-neutral-700 dark:text-neutral-300 hover:text-blue-600 transition-all group" 
-                       href={anchors.limpieza}>
+                    <a 
+                      className="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-blue-50 dark:hover:bg-blue-900/20 text-neutral-700 dark:text-neutral-300 hover:text-blue-600 transition-all group" 
+                      href={anchors.limpieza}
+                      onClick={() => setServicesOpen(false)}
+                    >
                       <span className="w-2 h-2 bg-cyan-500 rounded-full"></span>
                       <span>Limpieza profesional</span>
                     </a>
-                    <a className="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-blue-50 text-neutral-700 dark:text-neutral-300 hover:text-blue-600 transition-all group" 
-                       href={anchors.ortodoncia}>
+                    <a 
+                      className="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-blue-50 dark:hover:bg-blue-900/20 text-neutral-700 dark:text-neutral-300 hover:text-blue-600 transition-all group" 
+                      href={anchors.ortodoncia}
+                      onClick={() => setServicesOpen(false)}
+                    >
                       <span className="w-2 h-2 bg-purple-500 rounded-full"></span>
                       <span>Ortodoncia</span>
                     </a>
-                    <a className="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-blue-50 text-neutral-700 dark:text-neutral-300 hover:text-blue-600 transition-all group" 
-                       href={anchors.resinas}>
+                    <a 
+                      className="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-blue-50 dark:hover:bg-blue-900/20 text-neutral-700 dark:text-neutral-300 hover:text-blue-600 transition-all group" 
+                      href={anchors.resinas}
+                      onClick={() => setServicesOpen(false)}
+                    >
                       <span className="w-2 h-2 bg-emerald-500 rounded-full"></span>
                       <span>Resinas y coronas</span>
                     </a>
-                    <a className="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-blue-50 text-neutral-700 dark:text-neutral-300 hover:text-blue-600 transition-all group" 
-                       href={anchors.implantes}>
+                    <a 
+                      className="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-blue-50 dark:hover:bg-blue-900/20 text-neutral-700 dark:text-neutral-300 hover:text-blue-600 transition-all group" 
+                      href={anchors.implantes}
+                      onClick={() => setServicesOpen(false)}
+                    >
                       <span className="w-2 h-2 bg-orange-500 rounded-full"></span>
                       <span>Implantes dentales</span>
                     </a>
@@ -216,7 +276,7 @@ export default function Navbar() {
                     { label: 'Implantes dentales', href: anchors.implantes, color: 'bg-orange-500' },
                   ].map((item, index) => (
                     <a key={index} 
-                       className="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-blue-50 text-neutral-700 dark:text-neutral-300 transition-all"
+                       className="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-blue-50 dark:hover:bg-blue-900/20 text-neutral-700 dark:text-neutral-300 transition-all"
                        href={item.href} 
                        onClick={() => setMobileOpen(false)}>
                       <span className={`w-2 h-2 ${item.color} rounded-full`}></span>

@@ -99,11 +99,11 @@ export default function HeroVideoDentista() {
       {/* Contenido centrado verticalmente, respetando el alto del navbar */}
       <div className="container-px min-h-[calc(100svh-64px)] flex items-center py-12 sm:py-16">
         <div className="max-w-3xl">
-          <h1 className="text-4xl sm:text-5xl font-extrabold tracking-tight">
+          <h1 className="text-4xl sm:text-5xl font-extrabold tracking-tight text-brand-400">
             Tu sonrisa, <span className="text-brand-600">en manos expertas</span>
           </h1>
 
-          <p className="mt-5 text-lg rounded-2xl text-brand-800 bg-gradient-to-b from-brand-50/50 to-transparent  dark:text-gray-300">
+          <p className="mt-5 text-lg rounded-2xl text-brand-900 bg-gradient-to-b from-brand-50/90 to-transparent  dark:text-gray-900">
             Odontología integral con tecnología de punta y trato humano. Agenda en minutos y recibe recordatorios automáticos.
           </p>
 

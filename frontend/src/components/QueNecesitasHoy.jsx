@@ -22,7 +22,7 @@ export default function QueNecesitasHoy() {
               <span className="inline-flex h-10 w-10 items-center justify-center rounded-2xl bg-brand-50 text-2xl">{emoji}</span>
               <p className="font-semibold">{t}</p>
             </div>
-            <p className="mt-2 text-sm text-neutral-600 dark:text-neutral-300">{d}</p>
+            <p className="mt-2 text-sm text-neutral-600 dark:text-neutral-900">{d}</p>
             <span className="mt-3 inline-block text-sm text-brand-700 group-hover:underline">Ver más →</span>
           </Link>
         ))}

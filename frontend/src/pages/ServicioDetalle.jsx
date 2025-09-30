@@ -4,6 +4,7 @@ import HeroMedia from "../components/HeroMedia.jsx"
 import VideoPlayer from "../components/VideoPlayer.jsx"
 import BeforeAfter from "../components/BeforeAfter.jsx"
 import MediaGallery from "../components/MediaGallery.jsx"
+import AgendarEnServicios from "../components/AgendarEnServicios.jsx"
 
 // Iconos (como ya tenías)
 function IconLimpieza(props){return(<svg viewBox="0 0 24 24" {...props}><path d="M21 12h-8V4a1 1 0 0 0-2 0v8H3a1 1 0 0 0 0 2h8v8a1 1 0 0 0 2 0v-8h8a1 1 0 0 0 0-2z" fill="currentColor"/></svg>)}
@@ -31,7 +32,7 @@ const DATA = {
     media: {
       hero: {
         type: "video",
-        mp4:  "/videos/servicios/limpieza-hero.mp4",
+        mp4:  "/videos/servicios/limpieza-profilaxis.mp4",
         webm: "/videos/servicios/limpieza-hero.webm",
         poster: "/images/servicios/limpieza-hero.jpg",
         image: "/images/servicios/limpieza-hero.jpg"
@@ -83,7 +84,7 @@ const DATA = {
         before: "/images/servicios/ortodoncia-before.jpg",
         after:  "/images/servicios/ortodoncia-after.jpg",
       },
-      videos: []
+      videos: [{ mp4: "/videos/servicios/ortodoncia.mp4", poster: "/images/servicios/implantes-2.jpg", caption: "Colocación de brackets (animación)" }]
     }
   },
 
@@ -100,10 +101,10 @@ const DATA = {
     incluye: ["Valoración y colorimetría","Aislamiento y adhesión","Pulido final estético"],
     faq: [["¿Cuánto dura una resina?","Bien cuidada, varios años."],["¿Coronas en un día?","Depende de laboratorio y caso."]],
     media: {
-      hero: { type: "image", image: "/images/servicios/resinas-hero.jpg" },
+      hero: { type: "video", mp4: "/videos/servicios/resinas_coronas.mp4", poster: "/images/servicios/implantes-hero.jpg", image: "/images/servicios/implantes-hero.jpg" },
       gallery: [{ src: "/images/servicios/resinas-1.jpg" }, { src: "/images/servicios/resinas-2.jpg" }],
       beforeAfter: { before: "/images/servicios/resinas-before.jpg", after: "/images/servicios/resinas-after.jpg" },
-      videos: []
+      videos: [{ mp4: "/videos/servicios/resinas_coronas.mp4", poster: "/images/servicios/implantes-2.jpg", caption: "Colocación de implante (animación)" }]
     }
   },
 
@@ -130,7 +131,7 @@ const DATA = {
       hero: { type: "video", mp4: "/videos/servicios/implantes-hero.mp4", poster: "/images/servicios/implantes-hero.jpg", image: "/images/servicios/implantes-hero.jpg" },
       gallery: [{ src: "/images/servicios/implantes-1.jpg" }, { src: "/images/servicios/implantes-2.jpg" }],
       beforeAfter: { before: "/images/servicios/implantes-before.jpg", after: "/images/servicios/implantes-after.jpg" },
-      videos: [{ mp4: "/videos/servicios/implantes-hero.mp4", poster: "/images/servicios/implantes-2.jpg", caption: "Colocación de implante (animación)" }]
+      videos: [{ mp4: "/videos/servicios/implantes-hero.mp4", poster: "/images/servicios/implantes-2.jpg", caption: "Resinas y Coronas" }]
     }
   }
 }
@@ -276,7 +277,9 @@ export default function ServicioDetalle() {
             <a href="/#agendar" className="btn btn-primary mt-3">Solicitar plan</a>
           </div>
         </aside>
+
       </section>
+        <AgendarEnServicios/>
     </>
   )
 }

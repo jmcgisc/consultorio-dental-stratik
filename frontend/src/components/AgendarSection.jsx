@@ -3,14 +3,16 @@ import { supabase } from "../lib/supabase.js"
 
 function Step({ n, title, desc }) {
   return (
-    <div className="card">
+    <div className="bg-white dark:bg-gray-900 rounded-2xl border border-gray-200 dark:border-gray-700 p-6 shadow-sm">
       <div className="flex items-center gap-3">
-        <span className="inline-flex h-10 w-10 items-center justify-center rounded-2xl bg-brand-50 text-brand-700 font-bold">
+        <span className="inline-flex h-10 w-10 items-center justify-center rounded-2xl bg-blue-100 dark:bg-blue-900 text-blue-600 dark:text-blue-300 font-bold">
           {n}
         </span>
-        <p className="font-semibold">{title}</p>
+        <div>
+          <p className="font-semibold text-gray-900 dark:text-white">{title}</p>
+          <p className="mt-1 text-sm text-gray-600 dark:text-gray-300">{desc}</p>
+        </div>
       </div>
-      <p className="mt-2 text-sm text-neutral-600 dark:text-neutral-300">{desc}</p>
     </div>
   )
 }
@@ -81,12 +83,12 @@ export default function AgendarSection() {
   }
 
   return (
-    <section id="agendar" className="container-px py-16">
+    <section id="agendar" className="container-px py-16 bg-gray-50 dark:bg-gray-950">
       <div className="grid lg:grid-cols-2 gap-10 items-start">
         {/* Columna izquierda: pasos */}
         <div>
-          <h2 className="text-3xl font-bold">Agendar en 3 pasos</h2>
-          <p className="mt-2 text-neutral-600 dark:text-neutral-300">
+          <h2 className="text-3xl font-bold text-gray-900 dark:text-white">Agendar en 3 pasos</h2>
+          <p className="mt-2 text-gray-600 dark:text-gray-300">
             Rápido, sencillo y con confirmación por WhatsApp o llamada.
           </p>
 
@@ -96,11 +98,11 @@ export default function AgendarSection() {
             <Step n="3" title="¡Listo!" desc="Te confirmamos por WhatsApp/llamada y te esperamos." />
           </div>
 
-          <div className="mt-8 text-sm text-neutral-600 dark:text-neutral-300">
+          <div className="mt-8 text-sm text-gray-600 dark:text-gray-400">
             ¿Prefieres hablar?{" "}
-            <a className="underline" href="tel:+52 55 5577 0687">Llámanos</a> o escríbenos por{" "}
+            <a className="underline text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-200 transition-colors" href="tel:+52 55 5577 0687">Llámanos</a> o escríbenos por{" "}
             <a
-              className="underline"
+              className="underline text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-200 transition-colors"
               target="_blank" rel="noreferrer"
               href="https://wa.me/5215560910802?text=Hola,%20quiero%20agendar%20una%20cita"
             >
@@ -110,9 +112,9 @@ export default function AgendarSection() {
         </div>
 
         {/* Columna derecha: mini formulario */}
-        <div className="card">
-          <p className="text-xl font-semibold">Solicitar cita</p>
-          <p className="text-sm text-neutral-600 dark:text-neutral-300">
+        <div className="bg-white dark:bg-gray-900 rounded-2xl border border-gray-200 dark:border-gray-700 p-6 shadow-sm">
+          <p className="text-xl font-semibold text-gray-900 dark:text-white">Solicitar cita</p>
+          <p className="text-sm text-gray-600 dark:text-gray-300 mt-1">
             Te contactamos para confirmar el horario.
           </p>
 
@@ -128,61 +130,62 @@ export default function AgendarSection() {
             />
 
             <div className="sm:col-span-2">
-              <label className="text-sm font-medium">Nombre</label>
+              <label className="text-sm font-medium text-gray-700 dark:text-gray-300">Nombre</label>
               <input
                 name="nombre"
                 required
-                className="mt-1 w-full rounded-xl border border-neutral-300 dark:border-neutral-700 bg-transparent px-3 py-2 outline-none focus:ring-2 focus:ring-brand-300"
+                className="mt-1 w-full rounded-xl border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-white px-3 py-2 outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent placeholder-gray-500 dark:placeholder-gray-400"
+                placeholder="Tu nombre completo"
               />
             </div>
 
             <div>
-              <label className="text-sm font-medium">Teléfono</label>
+              <label className="text-sm font-medium text-gray-700 dark:text-gray-300">Teléfono</label>
               <input
                 name="telefono"
                 inputMode="tel"
                 placeholder="+52 55 5577 0687"
                 required
-                className="mt-1 w-full rounded-xl border border-neutral-300 dark:border-neutral-700 bg-transparent px-3 py-2 outline-none focus:ring-2 focus:ring-brand-300"
+                className="mt-1 w-full rounded-xl border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-white px-3 py-2 outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent placeholder-gray-500 dark:placeholder-gray-400"
               />
             </div>
 
             <div>
-              <label className="text-sm font-medium">Email (opcional)</label>
+              <label className="text-sm font-medium text-gray-700 dark:text-gray-300">Email (opcional)</label>
               <input
                 type="email"
                 name="email"
                 placeholder="tucorreo@ejemplo.com"
-                className="mt-1 w-full rounded-xl border border-neutral-300 dark:border-neutral-700 bg-transparent px-3 py-2 outline-none focus:ring-2 focus:ring-brand-300"
+                className="mt-1 w-full rounded-xl border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-white px-3 py-2 outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent placeholder-gray-500 dark:placeholder-gray-400"
               />
             </div>
 
             <div>
-              <label className="text-sm font-medium">Fecha</label>
+              <label className="text-sm font-medium text-gray-700 dark:text-gray-300">Fecha</label>
               <input
                 type="date"
                 name="fecha"
                 min={minDate}
                 required
-                className="mt-1 w-full rounded-xl border border-neutral-300 dark:border-neutral-700 bg-transparent px-3 py-2 outline-none focus:ring-2 focus:ring-brand-300"
+                className="mt-1 w-full rounded-xl border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-white px-3 py-2 outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
               />
             </div>
 
             <div>
-              <label className="text-sm font-medium">Hora</label>
+              <label className="text-sm font-medium text-gray-700 dark:text-gray-300">Hora</label>
               <input
                 type="time"
                 name="hora"
                 required
-                className="mt-1 w-full rounded-xl border border-neutral-300 dark:border-neutral-700 bg-transparent px-3 py-2 outline-none focus:ring-2 focus:ring-brand-300"
+                className="mt-1 w-full rounded-xl border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-white px-3 py-2 outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
               />
             </div>
 
             <div className="sm:col-span-2">
-              <label className="text-sm font-medium">Motivo</label>
+              <label className="text-sm font-medium text-gray-700 dark:text-gray-300">Motivo</label>
               <select
                 name="motivo"
-                className="mt-1 w-full rounded-xl border border-neutral-300 dark:border-neutral-700 bg-transparent px-3 py-2 outline-none focus:ring-2 focus:ring-brand-300"
+                className="mt-1 w-full rounded-xl border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-white px-3 py-2 outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                 defaultValue="Limpieza"
                 required
               >
@@ -195,36 +198,39 @@ export default function AgendarSection() {
             </div>
 
             <div className="sm:col-span-2">
-              <label className="text-sm font-medium">Comentarios (opcional)</label>
+              <label className="text-sm font-medium text-gray-700 dark:text-gray-300">Comentarios (opcional)</label>
               <textarea
                 name="comentarios"
                 rows="3"
-                className="mt-1 w-full rounded-xl border border-neutral-300 dark:border-neutral-700 bg-transparent px-3 py-2 outline-none focus:ring-2 focus:ring-brand-300"
+                className="mt-1 w-full rounded-xl border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-white px-3 py-2 outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent placeholder-gray-500 dark:placeholder-gray-400"
+                placeholder="¿Algo que debamos saber antes de tu visita?"
               />
             </div>
 
             {error && (
-              <div className="sm:col-span-2 text-sm text-red-600">{error}</div>
+              <div className="sm:col-span-2 text-sm text-red-600 dark:text-red-400 bg-red-50 dark:bg-red-900/20 p-3 rounded-lg">
+                {error}
+              </div>
             )}
 
             <button
               type="submit"
               disabled={loading}
-              className="btn btn-primary sm:col-span-2"
+              className="sm:col-span-2 bg-blue-600 hover:bg-blue-700 dark:bg-blue-700 dark:hover:bg-blue-800 text-white py-3 rounded-xl font-medium disabled:opacity-50 disabled:cursor-not-allowed transition-colors duration-200"
             >
               {loading ? "Enviando…" : "Solicitar cita"}
             </button>
 
             {ok && (
-              <p className="sm:col-span-2 text-sm text-green-600">
+              <div className="sm:col-span-2 text-sm text-green-600 dark:text-green-400 bg-green-50 dark:bg-green-900/20 p-3 rounded-lg">
                 ¡Recibimos tu solicitud! Te contactaremos para confirmar.
-              </p>
+              </div>
             )}
           </form>
 
-          <div className="mt-4 text-xs text-neutral-500">
+          <div className="mt-4 text-xs text-gray-500 dark:text-gray-400">
             Al enviar aceptas nuestro tratamiento de datos para contactarte.{" "}
-            <a className="underline" href="/politica-privacidad">Aviso</a>
+            <a className="underline text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-200 transition-colors" href="/politica-privacidad">Aviso</a>
           </div>
         </div>
       </div>

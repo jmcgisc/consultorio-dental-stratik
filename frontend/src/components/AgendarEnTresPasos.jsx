@@ -1,100 +1,193 @@
 import { useMemo, useState } from "react"
+import { supabase } from "../lib/supabase.js"
 
-function Paso({ n, titulo, desc }) {
+function Step({ n, title, desc }) {
   return (
-    <div className="card">
+    <div className="card bg-white dark:bg-neutral-800/50 border border-neutral-200 dark:border-neutral-700">
       <div className="flex items-center gap-3">
-        <span className="inline-flex h-10 w-10 items-center justify-center rounded-2xl bg-brand-50 text-brand-700 font-bold">
+        <span className="inline-flex h-10 w-10 items-center justify-center rounded-2xl bg-brand-50 dark:bg-brand-900/30 text-brand-700 dark:text-brand-300 font-bold">
           {n}
         </span>
         <div>
-          <p className="font-semibold">{titulo}</p>
-          <p className="text-sm text-neutral-600 dark:text-neutral-300">{desc}</p>
+          <p className="font-semibold text-neutral-800 dark:text-neutral-100">{title}</p>
+          <p className="mt-2 text-sm text-neutral-600 dark:text-neutral-300">{desc}</p>
         </div>
       </div>
     </div>
   )
 }
 
-export default function AgendarEnTresPasos() {
+export default function AgendarSection() {
+  // fecha mínima (hoy) para el input date
+  const minDate = useMemo(() => {
+    const d = new Date()
+    const mm = String(d.getMonth() + 1).padStart(2, "0")
+    const dd = String(d.getDate()).padStart(2, "0")
+    return `${d.getFullYear()}-${mm}-${dd}`
+  }, [])
+
   const [loading, setLoading] = useState(false)
   const [ok, setOk] = useState(false)
-
-  // Fecha mínima = hoy (para input date)
-  const minDate = useMemo(() => new Date().toISOString().split("T")[0], [])
+  const [error, setError] = useState("")
 
   async function onSubmit(e) {
     e.preventDefault()
     setLoading(true)
-    const data = Object.fromEntries(new FormData(e.currentTarget))
-    // 🔗 Aquí luego haremos POST a /api/citas (backend)
-    // await fetch("/api/citas", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(data) })
-    console.log("Solicitud de cita:", data)
-    setTimeout(() => { setOk(true); setLoading(false) }, 600)
+    setError("")
+    const form = new FormData(e.currentTarget)
+    const data = Object.fromEntries(form)
+
+    // Honeypot anti-spam: si viene lleno, respondemos OK silencioso
+    if (data.website) {
+      setOk(true)
+      setLoading(false)
+      e.currentTarget.reset()
+      return
+    }
+
+    // Validación simple
+    if (!data.nombre?.trim()) { setLoading(false); return setError("Por favor, escribe tu nombre.") }
+    if (!/^[0-9+\-\s()]{8,}$/.test(data.telefono || "")) { setLoading(false); return setError("Teléfono no válido.") }
+    if (!data.fecha) { setLoading(false); return setError("Selecciona una fecha.") }
+    if (!data.hora) { setLoading(false); return setError("Selecciona una hora.") }
+    if (!data.motivo?.trim()) { setLoading(false); return setError("Selecciona o escribe un motivo.") }
+
+    try {
+      // Combinar fecha+hora locales → guardar en UTC (timestamptz)
+      const startsLocal = new Date(`${data.fecha}T${data.hora}:00`)
+      const startsISO = startsLocal.toISOString()
+
+      const { error: insertError } = await supabase
+        .from('citas')
+        .insert([{
+          nombre: data.nombre,
+          telefono: data.telefono,
+          email: data.email || null,
+          motivo: data.motivo,
+          comentarios: data.comentarios || null,
+          starts_at: startsISO,
+          status: 'PENDING',
+          source: 'landing',
+        }])
+
+      if (insertError) throw insertError
+
+      setOk(true)
+      e.currentTarget.reset()
+    } catch (err) {
+      console.error(err)
+      setError('No se pudo registrar la cita. Intenta de nuevo.')
+    } finally {
+      setLoading(false)
+    }
   }
 
   return (
-    <section id="agendar" className="container-px py-16">
-      <h2 className="text-3xl font-bold">Agenda en 3 pasos</h2>
-      <p className="mt-2 text-neutral-600 dark:text-neutral-300">
-        Rápido, sencillo y con confirmación por WhatsApp o llamada.
-      </p>
+    <section id="agendar" className="container-px py-16 bg-white dark:bg-neutral-900">
+      <div className="grid lg:grid-cols-2 gap-10 items-start">
+        {/* Columna izquierda: pasos */}
+        <div>
+          <h2 className="text-3xl font-bold text-neutral-800 dark:text-neutral-100">Agendar en 3 pasos</h2>
+          <p className="mt-2 text-neutral-600 dark:text-neutral-300">
+            Rápido, sencillo y con confirmación por WhatsApp o llamada.
+          </p>
 
-      {/* Pasos */}
-      <div className="mt-8 grid gap-6 lg:grid-cols-3">
-        <Paso n={1} titulo="Elige fecha y hora" desc="Selecciona el horario que mejor te acomode." />
-        <Paso n={2} titulo="Confirma tus datos" desc="Nombre y teléfono para confirmar tu cita." />
-        <Paso n={3} titulo="¡Listo!" desc="Te contactamos para confirmar en minutos." />
-      </div>
+          <div className="mt-8 grid gap-4">
+            <Step n="1" title="Elige fecha y hora" desc="Selecciona el horario que mejor te acomode." />
+            <Step n="2" title="Confirma tus datos" desc="Nombre y teléfono para contactarte." />
+            <Step n="3" title="¡Listo!" desc="Te confirmamos por WhatsApp/llamada y te esperamos." />
+          </div>
 
-      {/* Mini-form */}
-      <div className="mt-10 grid gap-8 lg:grid-cols-2">
-        <form onSubmit={onSubmit} className="card">
-          <p className="text-lg font-semibold">Solicitar cita</p>
-          <div className="grid sm:grid-cols-2 gap-4 mt-4">
-            <div>
-              <label className="text-sm font-medium">Nombre*</label>
+          <div className="mt-8 text-sm text-neutral-600 dark:text-neutral-400">
+            ¿Prefieres hablar?{" "}
+            <a className="underline text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300" href="tel:+52 55 5577 0687">Llámanos</a> o escríbenos por{" "}
+            <a
+              className="underline text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300"
+              target="_blank" rel="noreferrer"
+              href="https://wa.me/5215560910802?text=Hola,%20quiero%20agendar%20una%20cita"
+            >
+              WhatsApp
+            </a>.
+          </div>
+        </div>
+
+        {/* Columna derecha: mini formulario */}
+        <div className="card bg-white dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700">
+          <p className="text-xl font-semibold text-neutral-800 dark:text-neutral-100">Solicitar cita</p>
+          <p className="text-sm text-neutral-600 dark:text-neutral-300">
+            Te contactamos para confirmar el horario.
+          </p>
+
+          <form onSubmit={onSubmit} className="mt-6 grid sm:grid-cols-2 gap-4">
+            {/* Honeypot anti-spam */}
+            <input
+              type="text"
+              name="website"
+              autoComplete="off"
+              tabIndex="-1"
+              aria-hidden="true"
+              style={{ position:'absolute', left:'-9999px', top:'-9999px' }}
+            />
+
+            <div className="sm:col-span-2">
+              <label className="text-sm font-medium text-neutral-700 dark:text-neutral-300">Nombre</label>
               <input
-                name="nombre" required
-                className="mt-1 w-full rounded-xl border border-neutral-300 dark:border-neutral-700 bg-transparent px-3 py-2 outline-none focus:ring-2 focus:ring-brand-300"
-                placeholder="Tu nombre"
+                name="nombre"
+                required
+                className="mt-1 w-full rounded-xl border border-neutral-300 dark:border-neutral-600 bg-white dark:bg-neutral-700 text-neutral-800 dark:text-neutral-200 px-3 py-2 outline-none focus:ring-2 focus:ring-brand-300 focus:border-transparent placeholder-neutral-500 dark:placeholder-neutral-400"
+                placeholder="Tu nombre completo"
               />
             </div>
+
             <div>
-              <label className="text-sm font-medium">Teléfono*</label>
+              <label className="text-sm font-medium text-neutral-700 dark:text-neutral-300">Teléfono</label>
               <input
-                name="telefono" required inputMode="tel" pattern="[0-9+() -]{8,}"
-                className="mt-1 w-full rounded-xl border border-neutral-300 dark:border-neutral-700 bg-transparent px-3 py-2 outline-none focus:ring-2 focus:ring-brand-300"
+                name="telefono"
+                inputMode="tel"
                 placeholder="+52 55 5577 0687"
+                required
+                className="mt-1 w-full rounded-xl border border-neutral-300 dark:border-neutral-600 bg-white dark:bg-neutral-700 text-neutral-800 dark:text-neutral-200 px-3 py-2 outline-none focus:ring-2 focus:ring-brand-300 focus:border-transparent placeholder-neutral-500 dark:placeholder-neutral-400"
               />
             </div>
-            <div className="sm:col-span-2">
-              <label className="text-sm font-medium">Email</label>
+
+            <div>
+              <label className="text-sm font-medium text-neutral-700 dark:text-neutral-300">Email (opcional)</label>
               <input
-                type="email" name="email"
-                className="mt-1 w-full rounded-xl border border-neutral-300 dark:border-neutral-700 bg-transparent px-3 py-2 outline-none focus:ring-2 focus:ring-brand-300"
+                type="email"
+                name="email"
                 placeholder="tucorreo@ejemplo.com"
+                className="mt-1 w-full rounded-xl border border-neutral-300 dark:border-neutral-600 bg-white dark:bg-neutral-700 text-neutral-800 dark:text-neutral-200 px-3 py-2 outline-none focus:ring-2 focus:ring-brand-300 focus:border-transparent placeholder-neutral-500 dark:placeholder-neutral-400"
               />
             </div>
+
             <div>
-              <label className="text-sm font-medium">Fecha*</label>
+              <label className="text-sm font-medium text-neutral-700 dark:text-neutral-300">Fecha</label>
               <input
-                type="date" name="fecha" required min={minDate}
-                className="mt-1 w-full rounded-xl border border-neutral-300 dark:border-neutral-700 bg-transparent px-3 py-2 outline-none focus:ring-2 focus:ring-brand-300"
+                type="date"
+                name="fecha"
+                min={minDate}
+                required
+                className="mt-1 w-full rounded-xl border border-neutral-300 dark:border-neutral-600 bg-white dark:bg-neutral-700 text-neutral-800 dark:text-neutral-200 px-3 py-2 outline-none focus:ring-2 focus:ring-brand-300 focus:border-transparent"
               />
             </div>
+
             <div>
-              <label className="text-sm font-medium">Hora*</label>
+              <label className="text-sm font-medium text-neutral-700 dark:text-neutral-300">Hora</label>
               <input
-                type="time" name="hora" required
-                className="mt-1 w-full rounded-xl border border-neutral-300 dark:border-neutral-700 bg-transparent px-3 py-2 outline-none focus:ring-2 focus:ring-brand-300"
+                type="time"
+                name="hora"
+                required
+                className="mt-1 w-full rounded-xl border border-neutral-300 dark:border-neutral-600 bg-white dark:bg-neutral-700 text-neutral-800 dark:text-neutral-200 px-3 py-2 outline-none focus:ring-2 focus:ring-brand-300 focus:border-transparent"
               />
             </div>
+
             <div className="sm:col-span-2">
-              <label className="text-sm font-medium">Motivo</label>
+              <label className="text-sm font-medium text-neutral-700 dark:text-neutral-300">Motivo</label>
               <select
                 name="motivo"
-                className="mt-1 w-full rounded-xl border border-neutral-300 dark:border-neutral-700 bg-transparent px-3 py-2 outline-none focus:ring-2 focus:ring-brand-300"
+                className="mt-1 w-full rounded-xl border border-neutral-300 dark:border-neutral-600 bg-white dark:bg-neutral-700 text-neutral-800 dark:text-neutral-200 px-3 py-2 outline-none focus:ring-2 focus:ring-brand-300 focus:border-transparent"
+                defaultValue="Limpieza"
+                required
               >
                 <option value="Limpieza">Limpieza</option>
                 <option value="Ortodoncia">Ortodoncia</option>
@@ -103,54 +196,42 @@ export default function AgendarEnTresPasos() {
                 <option value="Valoración">Valoración</option>
               </select>
             </div>
+
             <div className="sm:col-span-2">
-              <label className="text-sm font-medium">Comentarios</label>
+              <label className="text-sm font-medium text-neutral-700 dark:text-neutral-300">Comentarios (opcional)</label>
               <textarea
-                name="comentarios" rows="3"
-                className="mt-1 w-full rounded-xl border border-neutral-300 dark:border-neutral-700 bg-transparent px-3 py-2 outline-none focus:ring-2 focus:ring-brand-300"
+                name="comentarios"
+                rows="3"
+                className="mt-1 w-full rounded-xl border border-neutral-300 dark:border-neutral-600 bg-white dark:bg-neutral-700 text-neutral-800 dark:text-neutral-200 px-3 py-2 outline-none focus:ring-2 focus:ring-brand-300 focus:border-transparent placeholder-neutral-500 dark:placeholder-neutral-400"
                 placeholder="¿Algo que debamos saber antes de tu visita?"
               />
             </div>
+
+            {error && (
+              <div className="sm:col-span-2 text-sm text-red-600 dark:text-red-400 bg-red-50 dark:bg-red-900/20 p-2 rounded-lg">
+                {error}
+              </div>
+            )}
+
+            <button
+              type="submit"
+              disabled={loading}
+              className="btn btn-primary sm:col-span-2 bg-blue-600 hover:bg-blue-700 dark:bg-blue-700 dark:hover:bg-blue-800 text-white py-3 rounded-xl font-medium disabled:opacity-50 disabled:cursor-not-allowed"
+            >
+              {loading ? "Enviando…" : "Solicitar cita"}
+            </button>
+
+            {ok && (
+              <div className="sm:col-span-2 text-sm text-green-600 dark:text-green-400 bg-green-50 dark:bg-green-900/20 p-3 rounded-lg">
+                ¡Recibimos tu solicitud! Te contactaremos para confirmar.
+              </div>
+            )}
+          </form>
+
+          <div className="mt-4 text-xs text-neutral-500 dark:text-neutral-400">
+            Al enviar aceptas nuestro tratamiento de datos para contactarte.{" "}
+            <a className="underline text-blue-600 dark:text-blue-400" href="/politica-privacidad">Aviso</a>
           </div>
-
-          <button disabled={loading} className="btn btn-primary mt-6 w-full">
-            {loading ? "Enviando…" : "Solicitar cita"}
-          </button>
-
-          {ok && (
-            <p className="text-sm text-green-600 mt-3">
-              ¡Gracias! Recibimos tu solicitud y te contactaremos para confirmar.
-            </p>
-          )}
-
-          {/* Tip: botón alterno de WhatsApp prellenado */}
-          <a
-            className="btn mt-3 w-full"
-            href={`https://wa.me/5215560910802?text=${encodeURIComponent("Hola, quiero agendar una cita en la clínica dental.")}`}
-            target="_blank" rel="noreferrer"
-          >
-            Prefiero confirmar por WhatsApp
-          </a>
-        </form>
-
-        {/* Bloque informativo lado derecho */}
-        <div className="card">
-          <p className="text-lg font-semibold">Horarios y contacto</p>
-          <ul className="mt-4 space-y-2 text-sm text-neutral-700 dark:text-neutral-300">
-            <li><strong>Lun–Vie:</strong> 9:00–19:00</li>
-            <li><strong>Sábados:</strong> 9:00–14:00</li>
-            <li><strong>Tel:</strong> (55) 0000 0000</li>
-            <li><strong>Dirección:</strong> Av. Principal 123, CDMX</li>
-          </ul>
-
-          <div className="mt-6 grid grid-cols-2 gap-3">
-            <a className="btn w-full" href="tel:+525555770687">Llamar</a>
-            <a className="btn w-full" href="https://maps.google.com" target="_blank" rel="noreferrer">Cómo llegar</a>
-          </div>
-
-          <p className="text-xs text-neutral-500 mt-6">
-            *La hora seleccionada se confirmará según disponibilidad de agenda.
-          </p>
         </div>
       </div>
     </section>
