@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useState, useRef, useEffect } from "react"
 
 export default function BeforeAfter({
   beforeSrc,
@@ -7,10 +7,55 @@ export default function BeforeAfter({
   labelAfter = "Después",
   alt = "Comparación antes y después",
 }) {
-  const [pct, setPct] = useState(50) // porcentaje visible del "Antes"
+  const [pct, setPct] = useState(50)
+  const [isDragging, setIsDragging] = useState(false)
+  const containerRef = useRef(null)
+
+  // Eventos globales para el drag
+  useEffect(() => {
+    const handleMouseMove = (e) => {
+      if (!isDragging || !containerRef.current) return
+      
+      const rect = containerRef.current.getBoundingClientRect()
+      const x = e.clientX - rect.left
+      const percentage = Math.max(0, Math.min(100, (x / rect.width) * 100))
+      setPct(percentage)
+    }
+
+    const handleMouseUp = () => {
+      setIsDragging(false)
+    }
+
+    if (isDragging) {
+      document.addEventListener('mousemove', handleMouseMove)
+      document.addEventListener('mouseup', handleMouseUp)
+      document.body.style.cursor = 'ew-resize'
+      document.body.style.userSelect = 'none'
+    }
+
+    return () => {
+      document.removeEventListener('mousemove', handleMouseMove)
+      document.removeEventListener('mouseup', handleMouseUp)
+      document.body.style.cursor = ''
+      document.body.style.userSelect = ''
+    }
+  }, [isDragging])
+
+  const handleContainerClick = (e) => {
+    if (!containerRef.current) return
+    
+    const rect = containerRef.current.getBoundingClientRect()
+    const x = e.clientX - rect.left
+    const percentage = Math.max(0, Math.min(100, (x / rect.width) * 100))
+    setPct(percentage)
+  }
 
   return (
-    <div className="relative rounded-3xl overflow-hidden aspect-[16/10] bg-neutral-200">
+    <div 
+      ref={containerRef}
+      className="relative rounded-3xl overflow-hidden aspect-[16/10] bg-neutral-200 select-none cursor-ew-resize"
+      onClick={handleContainerClick}
+    >
       {/* Imagen base = Después */}
       <img src={afterSrc} alt={alt} className="absolute inset-0 w-full h-full object-cover" />
 
@@ -22,30 +67,46 @@ export default function BeforeAfter({
         style={{ width: `${pct}%` }}
       />
 
-      {/* Divider */}
+      {/* Área de control ampliada */}
       <div
-        className="absolute top-0 bottom-0 w-px bg-white/80 shadow-[0_0_0_1px_rgba(0,0,0,0.08)]"
-        style={{ left: `${pct}%` }}
-      />
+        className="absolute top-0 bottom-0 w-1 bg-transparent cursor-ew-resize group"
+        style={{ left: `${pct}%`, marginLeft: '-8px' }}
+        onMouseDown={() => setIsDragging(true)}
+      >
+        {/* Línea divisoria visible */}
+        <div className="absolute top-0 bottom-0 left-1/2 transform -translate-x-1/2 w-0.5 bg-white/80 shadow-lg" />
+        
+        {/* Control deslizante central - más grande y con mejor feedback */}
+        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-white border-2 border-brand-500 shadow-lg flex items-center justify-center transition-all duration-200 group-hover:scale-110 group-hover:shadow-xl">
+          {/* Flechas indicadoras */}
+          <div className="flex gap-1">
+            <svg className="w-3 h-3 text-brand-500" fill="currentColor" viewBox="0 0 16 16">
+              <path d="M10 4L6 8l4 4"/>
+            </svg>
+            <svg className="w-3 h-3 text-brand-500" fill="currentColor" viewBox="0 0 16 16">
+              <path d="M6 4l4 4-4 4"/>
+            </svg>
+          </div>
+        </div>
+      </div>
 
       {/* Etiquetas */}
-      <span className="absolute left-3 top-3 text-xs px-2 py-1 rounded-full bg-black/60 text-white">
+      <span className="absolute left-3 top-3 text-xs px-3 py-2 rounded-full bg-black/60 text-white backdrop-blur-sm font-medium">
         {labelBefore}
       </span>
-      <span className="absolute right-3 top-3 text-xs px-2 py-1 rounded-full bg-black/60 text-white">
+      <span className="absolute right-3 top-3 text-xs px-3 py-2 rounded-full bg-black/60 text-white backdrop-blur-sm font-medium">
         {labelAfter}
       </span>
 
-      {/* Slider */}
-      <input
-        type="range"
-        min={0}
-        max={100}
-        value={pct}
-        onChange={(e) => setPct(Number(e.target.value))}
-        aria-label="Control de comparación"
-        className="absolute left-0 right-0 bottom-3 mx-auto w-[90%] appearance-none h-1 rounded-full bg-white/60 [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:h-4 [&::-webkit-slider-thumb]:w-4 [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-brand-500 [&::-moz-range-thumb]:h-4 [&::-moz-range-thumb]:w-4 [&::-moz-range-thumb]:rounded-full [&::-moz-range-thumb]:bg-brand-500"
-      />
+      {/* Indicador de porcentaje */}
+      <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 px-3 py-2 rounded-full bg-black/70 text-white text-sm font-medium backdrop-blur-sm">
+        {Math.round(pct)}% {labelBefore}
+      </div>
+
+      {/* Instrucción para el usuario */}
+      <div className="absolute bottom-4 left-4 text-xs text-white/80 bg-black/40 px-2 py-1 rounded">
+        ← Click o arrastra →
+      </div>
     </div>
   )
 }
