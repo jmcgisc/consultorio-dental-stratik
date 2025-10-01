@@ -87,7 +87,7 @@ export default function AgendarSection() {
       <div className="grid lg:grid-cols-2 gap-10 items-start">
         {/* Columna izquierda: pasos */}
         <div>
-          <h2 className="text-3xl font-bold text-gray-900 dark:text-white">Agendar en 3 pasos</h2>
+          <h2 className="text-3xl font-bold text-gray-900 dark:text-white">Agendar en 4 pasos</h2>
           <p className="mt-2 text-gray-600 dark:text-gray-300">
             Rápido, sencillo y con confirmación por WhatsApp o llamada.
           </p>
