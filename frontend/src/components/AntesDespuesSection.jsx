@@ -2,18 +2,18 @@ import BeforeAfter from "./BeforeAfter.jsx"
 
 const casos = [
   {
-    before: "/images/caso1-antes.jpg",
-    after:  "/images/caso1-despues.jpg",
-    titulo: "Resina estética en incisivo",
+    before: "/images/fotos/antes_despues/dientes_antes.png",
+    after:  "/images/fotos/antes_despues/dientes_despues.png",
+    titulo: "Implantes dentales",
   },
   {
-    before: "/images/caso2-antes.jpg",
-    after:  "/images/caso2-despues.jpg",
+    before: "/images/fotos/antes_despues/blanqueamiento_antes.png",
+    after:  "/images/fotos/antes_despues/blanqueamiento_despues.png",
     titulo: "Blanqueamiento dental",
   },
   {
-    before: "/images/caso3-antes.jpg",
-    after:  "/images/caso3-despues.jpg",
+    before: "/images/fotos/antes_despues/limpieza_antes.png",
+    after:  "/images/fotos/antes_despues/limpieza_despues.png",
     titulo: "Alineadores (6 meses)",
   },
 ]
