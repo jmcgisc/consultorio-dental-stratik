@@ -99,9 +99,9 @@ export default function BeforeAfter({
       </span>
 
       {/* Indicador de porcentaje */}
-      <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 px-3 py-2 rounded-full bg-black/70 text-white text-sm font-medium backdrop-blur-sm">
+      {/* <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 px-3 py-2 rounded-full bg-black/70 text-white text-sm font-medium backdrop-blur-sm">
         {Math.round(pct)}% {labelBefore}
-      </div>
+      </div> */}
 
       {/* Instrucción para el usuario */}
       <div className="absolute bottom-4 left-4 text-xs text-white/80 bg-black/40 px-2 py-1 rounded">

@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom"
 
-// Iconos mejorados y más profesionales
+// Iconos mejorados y más profesionales (ORIGINALES)
 function IconLimpieza(props) {
   return (
     <svg viewBox="0 0 24 24" {...props}>
@@ -31,7 +31,62 @@ function IconImplante(props) {
   )
 }
 
+/* Iconos extra para nuevas especialidades (simples y ligeros) */
+function IconProtesis(props){
+  return (
+    <svg viewBox="0 0 24 24" {...props}>
+      <rect x="3" y="8" width="18" height="8" rx="2" fill="currentColor"/>
+      <circle cx="8" cy="12" r="1.6" fill="#fff"/>
+      <circle cx="12" cy="12" r="1.6" fill="#fff"/>
+      <circle cx="16" cy="12" r="1.6" fill="#fff"/>
+    </svg>
+  )
+}
+function IconEstetica(props){
+  return (
+    <svg viewBox="0 0 24 24" {...props}>
+      <path d="M12 2l1.6 4.5L18 8.3l-4.3 1.6L12 14l-1.7-4.1L6 8.3l4.3-1.6L12 2Z" fill="currentColor"/>
+      <path d="M18 16l.8 1.9.2 1.8-1.7-.6L15.8 19 18 16Z" fill="currentColor" opacity=".6"/>
+    </svg>
+  )
+}
+function IconMaxilofacial(props){
+  return (
+    <svg viewBox="0 0 24 24" {...props}>
+      <path d="M12 3a7 7 0 0 0-7 7v2a7 7 0 0 0 7 7h1.5c1.5 0 2.9-1 3.3-2.5L18 13l-4 1-2-2 1-4 4-1-.7-1.5C15.7 3.9 13.9 3 12 3Z" fill="currentColor"/>
+    </svg>
+  )
+}
+function IconPediatria(props){
+  return (
+    <svg viewBox="0 0 24 24" {...props}>
+      <circle cx="12" cy="9" r="4" fill="currentColor"/>
+      <path d="M5 19a7 7 0 0 1 14 0H5Z" fill="currentColor" opacity=".85"/>
+      <circle cx="10" cy="9" r=".7" fill="#fff"/>
+      <circle cx="14" cy="9" r=".7" fill="#fff"/>
+    </svg>
+  )
+}
+function IconPeriodoncia(props){
+  return (
+    <svg viewBox="0 0 24 24" {...props}>
+      <path d="M4 16c3-2 5-3 8-3s5 1 8 3v2c-3-2-5-3-8-3s-5 1-8 3v-2Z" fill="currentColor"/>
+      <path d="M12 5a4 4 0 0 0-4 4v3h8V9a4 4 0 0 0-4-4Z" fill="currentColor" opacity=".8"/>
+    </svg>
+  )
+}
+function IconEndodoncia(props){
+  return (
+    <svg viewBox="0 0 24 24" {...props}>
+      <path d="M8 3h8v6a6 6 0 1 1-12 0V7a4 4 0 0 1 4-4Z" fill="currentColor"/>
+      <path d="M12 9c2 2 1 4-1 6s-3 4-1 6" stroke="#fff" strokeWidth="1.6" fill="none" strokeLinecap="round"/>
+    </svg>
+  )
+}
+
+/* ================== DATA ================== */
 const servicios = [
+  // —— TUS 4 ORIGINALES (sin cambios) ——
   { 
     id: 'servicio-limpieza',
     slug: 'limpieza',
@@ -68,6 +123,80 @@ const servicios = [
     gradient: 'from-orange-600 to-red-600',
     bgGradient: 'from-orange-50 to-red-50'
   },
+
+  // —— NUEVAS ESPECIALIDADES (añadidas) ——
+  {
+    id: 'servicio-protesis',
+    slug: 'protesis-dental',
+    t: 'Prótesis dental',
+    d: 'Coronas, puentes y prótesis removibles para recuperar función, masticación y estética.',
+    Icon: IconProtesis,
+    gradient: 'from-amber-600 to-orange-600',
+    bgGradient: 'from-amber-50 to-orange-50'
+  },
+  {
+    id: 'servicio-estetica',
+    slug: 'odontologia-estetica',
+    t: 'Odontología estética',
+    d: 'Carillas, blanqueamiento y contorneado para un diseño de sonrisa mínimamente invasivo.',
+    Icon: IconEstetica,
+    gradient: 'from-pink-600 to-fuchsia-600',
+    bgGradient: 'from-pink-50 to-fuchsia-50'
+  },
+  {
+    id: 'servicio-maxilofacial',
+    slug: 'cirugia-maxilofacial',
+    t: 'Cirugía maxilofacial',
+    d: 'Extracciones complejas, terceros molares y procedimientos quirúrgicos de tejidos orales.',
+    Icon: IconMaxilofacial,
+    gradient: 'from-slate-600 to-gray-700',
+    bgGradient: 'from-slate-50 to-gray-100'
+  },
+  {
+    id: 'servicio-odontopediatria',
+    slug: 'odontopediatria',
+    t: 'Odontopediatría',
+    d: 'Atención dental para niñas y niños: selladores, flúor, restauraciones y control conductual.',
+    Icon: IconPediatria,
+    gradient: 'from-sky-600 to-cyan-600',
+    bgGradient: 'from-sky-50 to-cyan-50'
+  },
+  {
+    id: 'servicio-ortodoncia-general',
+    slug: 'ortodoncia-general', // para no chocar con 'ortodoncia'
+    t: 'Ortodoncia',
+    d: 'Corrección de alineación y mordida con distintos sistemas según tu caso y objetivos.',
+    Icon: IconOrtodoncia,
+    gradient: 'from-indigo-600 to-blue-600',
+    bgGradient: 'from-indigo-50 to-blue-50'
+  },
+  {
+    id: 'servicio-implantologia',
+    slug: 'implantologia',
+    t: 'Implantología',
+    d: 'Planificación digital, cirugía guiada y rehabilitación protésica sobre implantes.',
+    Icon: IconImplante,
+    gradient: 'from-orange-600 to-red-600',
+    bgGradient: 'from-orange-50 to-red-50'
+  },
+  {
+    id: 'servicio-periodoncia',
+    slug: 'periodoncia',
+    t: 'Periodoncia',
+    d: 'Tratamientos de encías: raspado y alisado radicular, mantenimiento y cirugía periodontal.',
+    Icon: IconPeriodoncia,
+    gradient: 'from-emerald-600 to-teal-600',
+    bgGradient: 'from-emerald-50 to-teal-50'
+  },
+  {
+    id: 'servicio-endodoncia',
+    slug: 'endodoncia',
+    t: 'Endodoncia',
+    d: 'Tratamiento de conductos para eliminar dolor y conservar piezas con técnicas rotatorias.',
+    Icon: IconEndodoncia,
+    gradient: 'from-blue-600 to-cyan-600',
+    bgGradient: 'from-blue-50 to-cyan-50'
+  },
 ]
 
 export default function ServiciosGrid() {
@@ -94,31 +223,38 @@ export default function ServiciosGrid() {
         {/* Grid */}
         <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
           {servicios.map(({id, slug, t, d, Icon, gradient, bgGradient}) => (
-            <div key={id} id={id} className="group relative scroll-mt-28">
-              <div className="relative bg-white rounded-2xl shadow-lg border border-gray-100 hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
-                <div className="p-6">
+            <div key={id} id={id} className="group relative scroll-mt-28 h-full">
+              {/* CARD = altura uniforme */}
+              <div className="relative bg-white rounded-2xl shadow-lg border border-gray-100 hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 min-h-[380px] md:min-h-[410px] flex flex-col">
+                <div className="p-6 flex flex-col flex-1">
+                  {/* Icono */}
                   <div className={`relative inline-flex mb-4 p-3 rounded-2xl ${bgGradient} group-hover:scale-110 transition-transform duration-300`}>
                     <div className={`w-12 h-12 rounded-xl bg-gradient-to-r ${gradient} flex items-center justify-center shadow-md`}>
                       <Icon className="h-6 w-6 text-white" />
                     </div>
                   </div>
 
-                  <h3 className="text-xl font-bold text-gray-900 mb-3 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-blue-600 group-hover:to-purple-600 transition-all duration-300">
-                    {t}
-                  </h3>
+                  {/* Texto */}
+                  <div className="space-y-3 flex-1">
+                    <h3 className="text-xl font-bold text-gray-900 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-blue-600 group-hover:to-purple-600 transition-all duration-300">
+                      {t}
+                    </h3>
+                    <p className="text-gray-600 leading-relaxed">
+                      {d}
+                    </p>
+                  </div>
 
-                  <p className="text-gray-600 leading-relaxed mb-4">{d}</p>
-
-                  {/* Link a la página del servicio */}
+                  {/* CTA fijo abajo */}
                   <Link
                     to={`/servicios/${slug}`}
-                    className="w-full py-2 bg-gray-100 text-gray-700 rounded-lg font-medium hover:bg-gray-200 transition-colors duration-200 flex items-center justify-center gap-2 group-hover:shadow-inner"
+                    className="mt-6 w-full py-2 bg-gray-100 text-gray-700 rounded-lg font-medium hover:bg-gray-200 transition-colors duration-200 flex items-center justify-center gap-2 group-hover:shadow-inner"
                   >
                     <span>Saber más</span>
                     <span className="group-hover:translate-x-1 transition-transform">→</span>
                   </Link>
                 </div>
 
+                {/* Borde inferior decorativo */}
                 <div className={`absolute bottom-0 left-1/2 transform -translate-x-1/2 w-0 h-1 bg-gradient-to-r ${gradient} group-hover:w-full transition-all duration-500 rounded-full`}></div>
               </div>
             </div>
