@@ -1,5 +1,10 @@
 import { useMemo, useState } from "react"
-import { supabase } from "../lib/supabase.js"
+import emailjs from "@emailjs/browser"
+
+const EMAILJS_SERVICE_ID = import.meta.env.VITE_EMAILJS_SERVICE_ID
+const EMAILJS_TEMPLATE_ID_CLINIC = import.meta.env.VITE_EMAILJS_TEMPLATE_ID_CLINIC
+const EMAILJS_TEMPLATE_ID_USER = import.meta.env.VITE_EMAILJS_TEMPLATE_ID_USER // opcional
+const EMAILJS_PUBLIC_KEY = import.meta.env.VITE_EMAILJS_PUBLIC_KEY
 
 function Step({ n, title, desc }) {
   return (
@@ -25,19 +30,63 @@ export default function AgendarSection() {
     const dd = String(d.getDate()).padStart(2, "0")
     return `${d.getFullYear()}-${mm}-${dd}`
   }, [])
-
+  
   const [loading, setLoading] = useState(false)
   const [ok, setOk] = useState(false)
   const [error, setError] = useState("")
+  const [mailWarn, setMailWarn] = useState("") // aviso suave si el correo al usuario falla
+
+  async function sendEmails(data, startsISO) {
+    if (!EMAILJS_SERVICE_ID || !EMAILJS_TEMPLATE_ID_CLINIC || !EMAILJS_PUBLIC_KEY) {
+      console.warn("[EmailJS] Faltan variables de entorno. Saltando envío.")
+      return { clinic: "skipped", user: "skipped" }
+    }
+
+    const common = {
+      nombre: data.nombre,
+      telefono: data.telefono,
+      email: data.email || "",
+      motivo: data.motivo,
+      comentarios: data.comentarios || "",
+      fecha: data.fecha,
+      hora: data.hora,
+      starts_iso: startsISO,
+      page_url: window?.location?.href || ""
+    }
+
+    const tasks = [
+      // correo a la clínica
+      emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID_CLINIC, common, EMAILJS_PUBLIC_KEY)
+    ]
+
+    // correo de cortesía al usuario (opcional)
+    if (EMAILJS_TEMPLATE_ID_USER && data.email) {
+      const toUser = {
+        to_email: data.email,
+        nombre: data.nombre,
+        fecha: data.fecha,
+        hora: data.hora,
+        motivo: data.motivo
+      }
+      tasks.push(emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID_USER, toUser, EMAILJS_PUBLIC_KEY))
+    }
+
+    const results = await Promise.allSettled(tasks)
+    return {
+      clinic: results[0]?.status,
+      user: results[1]?.status ?? "skipped"
+    }
+  }
 
   async function onSubmit(e) {
     e.preventDefault()
     setLoading(true)
     setError("")
+    setMailWarn("")
     const form = new FormData(e.currentTarget)
     const data = Object.fromEntries(form)
 
-    // Honeypot anti-spam: si viene lleno, respondemos OK silencioso
+    // Honeypot anti-spam
     if (data.website) {
       setOk(true)
       setLoading(false)
@@ -53,30 +102,30 @@ export default function AgendarSection() {
     if (!data.motivo?.trim()) { setLoading(false); return setError("Selecciona o escribe un motivo.") }
 
     try {
-      // Combinar fecha+hora locales → guardar en UTC (timestamptz)
+      // Combinar fecha+hora locales → ISO (para plantillas)
       const startsLocal = new Date(`${data.fecha}T${data.hora}:00`)
       const startsISO = startsLocal.toISOString()
 
-      const { error: insertError } = await supabase
-        .from('citas')
-        .insert([{
-          nombre: data.nombre,
-          telefono: data.telefono,
-          email: data.email || null,
-          motivo: data.motivo,
-          comentarios: data.comentarios || null,
-          starts_at: startsISO,
-          status: 'PENDING',
-          source: 'landing',
-        }])
+      // Enviar emails
+      const mailRes = await sendEmails(data, startsISO)
 
-      if (insertError) throw insertError
+      const clinicOk = mailRes.clinic === "fulfilled"
+      const userOk = mailRes.user === "fulfilled" || mailRes.user === "skipped"
+
+      if (!clinicOk) {
+        // si ni siquiera se envió a la clínica, lo consideramos error
+        return setError("No pudimos enviar tu solicitud. Intenta de nuevo o contáctanos por WhatsApp.")
+      }
+      // si el correo al usuario falló, avisamos de forma suave
+      if (!userOk) {
+        setMailWarn("Recibimos tu solicitud, pero el correo de confirmación no pudo enviarse.")
+      }
 
       setOk(true)
       e.currentTarget.reset()
     } catch (err) {
-      console.error(err)
-      setError('No se pudo registrar la cita. Intenta de nuevo.')
+      console.error("[EmailJS] error:", err)
+      setError("No pudimos enviar tu solicitud. Intenta nuevamente.")
     } finally {
       setLoading(false)
     }
@@ -156,7 +205,7 @@ export default function AgendarSection() {
                 type="email"
                 name="email"
                 placeholder="tucorreo@ejemplo.com"
-                className="mt-1 w-full rounded-xl border border-neutral-300 dark:border-neutral-600 bg-white dark:bg-neutral-700 text-neutral-800 dark:text-neutral-200 px-3 py-2 outline-none focus:ring-2 focus:ring-brand-300 focus:border-transparent placeholder-neutral-500 dark:placeholder-neutral-400"
+                className="mt-1 w-full rounded-xl border border-neutral-300 dark:border-neutral-600 bg-white dark:bg-neutral-700 text-neutral-800 dark:text-neutral-200 px-3 py-2 outline-none focus:ring-2 focus:ring-brand-300 focus:border-transparent"
               />
             </div>
 
@@ -210,6 +259,11 @@ export default function AgendarSection() {
             {error && (
               <div className="sm:col-span-2 text-sm text-red-600 dark:text-red-400 bg-red-50 dark:bg-red-900/20 p-2 rounded-lg">
                 {error}
+              </div>
+            )}
+            {mailWarn && !error && (
+              <div className="sm:col-span-2 text-sm text-amber-700 dark:text-amber-400 bg-amber-50 dark:bg-amber-900/20 p-2 rounded-lg">
+                {mailWarn}
               </div>
             )}
 

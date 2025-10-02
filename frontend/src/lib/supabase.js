@@ -1,9 +1,11 @@
-import { createClient } from '@supabase/supabase-js'
-
-export const supabase = createClient(
-  import.meta.env.VITE_SUPABASE_URL,
-  import.meta.env.VITE_SUPABASE_ANON_KEY,
-  {
-    auth: { persistSession: false },
+// ⚠️ TEMPORAL: desactivar Supabase para encontrar referencias
+export const supabase = {
+  from() {
+    console.trace("[TEMP] Alguien llamó a supabase.from(...) — elimina esta referencia")
+    return {
+      insert() {
+        throw new Error("[TEMP] Supabase desactivado. Quita la llamada en este componente.")
+      }
+    }
   }
-)
+}

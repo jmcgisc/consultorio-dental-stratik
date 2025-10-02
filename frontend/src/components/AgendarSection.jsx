@@ -1,5 +1,10 @@
 import { useMemo, useState } from "react"
-import { supabase } from "../lib/supabase.js"
+import emailjs from "@emailjs/browser"
+
+const EMAILJS_SERVICE_ID = import.meta.env.VITE_EMAILJS_SERVICE_ID
+const EMAILJS_TEMPLATE_ID_CLINIC = import.meta.env.VITE_EMAILJS_TEMPLATE_ID_CLINIC
+const EMAILJS_TEMPLATE_ID_USER = import.meta.env.VITE_EMAILJS_TEMPLATE_ID_USER // opcional
+const EMAILJS_PUBLIC_KEY = import.meta.env.VITE_EMAILJS_PUBLIC_KEY
 
 function Step({ n, title, desc }) {
   return (
@@ -29,15 +34,63 @@ export default function AgendarSection() {
   const [loading, setLoading] = useState(false)
   const [ok, setOk] = useState(false)
   const [error, setError] = useState("")
+  const [mailWarn, setMailWarn] = useState("")
+
+  async function sendEmails(data, startsISO) {
+    if (!EMAILJS_SERVICE_ID || !EMAILJS_TEMPLATE_ID_CLINIC || !EMAILJS_PUBLIC_KEY) {
+      console.warn("[EmailJS] Faltan variables de entorno. Saltando envío.")
+      return { clinic: "skipped", user: "skipped" }
+    }
+
+    const common = {
+      nombre: data.nombre,
+      telefono: data.telefono,
+      email: data.email || "",
+      motivo: data.motivo,
+      comentarios: data.comentarios || "",
+      fecha: data.fecha,
+      hora: data.hora,
+      starts_iso: startsISO,
+      page_url: window?.location?.href || ""
+    }
+
+    const tasks = [
+      emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID_CLINIC, common, EMAILJS_PUBLIC_KEY)
+    ]
+
+    if (EMAILJS_TEMPLATE_ID_USER && data.email) {
+      tasks.push(
+        emailjs.send(
+          EMAILJS_SERVICE_ID,
+          EMAILJS_TEMPLATE_ID_USER,
+          {
+            to_email: data.email,
+            nombre: data.nombre,
+            fecha: data.fecha,
+            hora: data.hora,
+            motivo: data.motivo
+          },
+          EMAILJS_PUBLIC_KEY
+        )
+      )
+    }
+
+    const res = await Promise.allSettled(tasks)
+    return {
+      clinic: res[0]?.status,
+      user: res[1]?.status ?? "skipped"
+    }
+  }
 
   async function onSubmit(e) {
     e.preventDefault()
     setLoading(true)
     setError("")
+    setMailWarn("")
     const form = new FormData(e.currentTarget)
     const data = Object.fromEntries(form)
 
-    // Honeypot anti-spam: si viene lleno, respondemos OK silencioso
+    // Honeypot anti-spam
     if (data.website) {
       setOk(true)
       setLoading(false)
@@ -53,41 +106,36 @@ export default function AgendarSection() {
     if (!data.motivo?.trim()) { setLoading(false); return setError("Selecciona o escribe un motivo.") }
 
     try {
-      // Combinar fecha+hora locales → guardar en UTC (timestamptz)
       const startsLocal = new Date(`${data.fecha}T${data.hora}:00`)
       const startsISO = startsLocal.toISOString()
 
-      const { error: insertError } = await supabase
-        .from('citas')
-        .insert([{
-          nombre: data.nombre,
-          telefono: data.telefono,
-          email: data.email || null,
-          motivo: data.motivo,
-          comentarios: data.comentarios || null,
-          starts_at: startsISO,
-          status: 'PENDING',
-          source: 'landing',
-        }])
+      //  Enviar por EmailJS
+      const mailRes = await sendEmails(data, startsISO)
+      const clinicOk = mailRes.clinic === "fulfilled"
+      const userOk = mailRes.user === "fulfilled" || mailRes.user === "skipped"
 
-      if (insertError) throw insertError
+      if (!clinicOk) {
+        return setError("No pudimos enviar tu solicitud. Intenta de nuevo o contáctanos por WhatsApp.")
+      }
+      if (!userOk) {
+        setMailWarn("Recibimos tu solicitud, pero el correo de confirmación no pudo enviarse.")
+      }
 
       setOk(true)
       e.currentTarget.reset()
     } catch (err) {
       console.error(err)
-      setError('No se pudo registrar la cita. Intenta de nuevo.')
+      setError("No pudimos enviar tu solicitud. Intenta nuevamente.")
     } finally {
       setLoading(false)
     }
   }
 
-  {/* especialistasensaludbucal.1@gmail.com  va a ir a este correo*/}
+  {/* especialistasensaludbucal.1@gmail.com  va a ir a este correo (configúralo en la plantilla EmailJS) */}
 
   return (
     <section id="agendar" className="container-px py-16 bg-gray-50 dark:bg-gray-950">
       <div className="grid lg:grid-cols-2 gap-10 items-start">
-      
         <div>
           <h2 className="text-3xl font-bold text-gray-900 dark:text-white">Agendar en 3 pasos</h2>
           <p className="mt-2 text-gray-600 dark:text-gray-300">
@@ -212,6 +260,11 @@ export default function AgendarSection() {
             {error && (
               <div className="sm:col-span-2 text-sm text-red-600 dark:text-red-400 bg-red-50 dark:bg-red-900/20 p-3 rounded-lg">
                 {error}
+              </div>
+            )}
+            {mailWarn && !error && (
+              <div className="sm:col-span-2 text-sm text-amber-700 dark:text-amber-400 bg-amber-50 dark:bg-amber-900/20 p-3 rounded-lg">
+                {mailWarn}
               </div>
             )}
 
