@@ -275,7 +275,7 @@ export default function AgendarSection() {
             >
               {loading ? "Enviando…" : "Solicitar cita"}
             </button>
-
+  
             {ok && (
               <div className="sm:col-span-2 text-sm text-green-600 dark:text-green-400 bg-green-50 dark:bg-green-900/20 p-3 rounded-lg">
                 ¡Recibimos tu solicitud! Te contactaremos para confirmar.
