@@ -184,7 +184,7 @@ const DATA = {
       hero: { type: "video", mp4: "/videos/servicios/implantes-hero.mp4", poster: "/images/servicios/implantes-hero.jpg", image: "/images/servicios/implantes-hero.jpg" },
       gallery: [{ src: "/images/servicios/implantes-1.jpg" }, { src: "/images/servicios/implantes-2.jpg" }],
       beforeAfter: { before: "/images/servicios/implantes-before.jpg", after: "/images/servicios/implantes-after.jpg" },
-      videos: [{ mp4: "/videos/servicios/implantes-hero.mp4", poster: "/images/servicios/implantes-2.jpg", caption: "Resinas y Coronas" }]
+      videos: [{ mp4: "/videos/servicios/video-implantes.mp4", poster: "/images/servicios/implantes-3f.jpg", caption: "Resinas y Coronas" }]
     }
   },
 
@@ -214,7 +214,7 @@ const DATA = {
       ["¿Requiere mantenimiento?","Sí, higiene rigurosa y controles periódicos."]
     ],
     media: {
-      hero: { type: "image", image: "/images/servicios/protesis-hero.jpg" },
+      hero: { type: "image", image: "/images/servicios/protesis-1.jpg" },
       gallery: [
         { src: "/images/servicios/protesis-1.jpg", alt: "Corona cerámica" },
         { src: "/images/servicios/protesis-2.jpg", alt: "Puente fijo" }
@@ -253,10 +253,10 @@ const DATA = {
       ["¿Carillas en todos los dientes?","Solo donde esté indicado para armonía y función."]
     ],
     media: {
-      hero: { type: "image", image: "/images/servicios/estetica-hero.jpg" },
+      hero: { type: "video", mp4: "/videos/servicios/odontologia-1.mp4", poster: "/images/servicios/implantes-hero.jpg", image: "/images/servicios/implantes-hero.jpg" },
       gallery: [
-        { src: "/images/servicios/estetica-1.jpg", alt: "Carillas" },
-        { src: "/images/servicios/estetica-2.jpg", alt: "Blanqueamiento" }
+        { src: "/images/servicios/odontologia-1.jpg", alt: "Carillas" },
+        { src: "/images/servicios/odontologia-2.jpg", alt: "Blanqueamiento" }
       ],
       beforeAfter: {
         before: "/images/servicios/estetica-before.jpg",
@@ -290,10 +290,10 @@ const DATA = {
       ["¿Puedo trabajar al día siguiente?","Depende del caso; te orientamos en consulta."]
     ],
     media: {
-      hero: { type: "image", image: "/images/servicios/maxilofacial-hero.jpg" },
+      hero: { type: "video", image: "/images/servicios/odontologia-2.jpg" },
       gallery: [
-        { src: "/images/servicios/maxilofacial-1.jpg" },
-        { src: "/images/servicios/maxilofacial-2.jpg" }
+        { src: "/images/servicios/odontologia-1.jpg" },
+        { src: "/images/servicios/odontologia-2.jpg" }
       ],
       beforeAfter: null,
       videos: []
@@ -324,10 +324,10 @@ const DATA = {
       ["¿Anestesia?","Solo si es necesario y con técnicas seguras."]
     ],
     media: {
-      hero: { type: "image", image: "/images/servicios/pediatria-hero.jpg" },
+      hero: { type: "image", image: "/images/servicios/odontopediatria-3.jpg" },
       gallery: [
-        { src: "/images/servicios/pediatria-1.jpg" },
-        { src: "/images/servicios/pediatria-2.jpg" }
+        { src: "/images/servicios/odontopediatria-1.jpg" },
+        { src: "/images/servicios/odontopediatria-2.jpg" }
       ],
       beforeAfter: null,
       videos: []
@@ -358,10 +358,10 @@ const DATA = {
       ["¿Retención al final?","Sí, es esencial para mantener resultados."]
     ],
     media: {
-      hero: { type: "image", image: "/images/servicios/ortodoncia-general-hero.jpg" },
+      hero: { type: "image", image: "/images/servicios/ortodoncia-4.jpg" },
       gallery: [
-        { src: "/images/servicios/ortodoncia-general-1.jpg" },
-        { src: "/images/servicios/ortodoncia-general-2.jpg" }
+        { src: "/images/servicios/ortodoncia-1.jpg" },
+        { src: "/images/servicios/ortodoncia-2.jpg" }
       ],
       beforeAfter: {
         before: "/images/servicios/ortodoncia-general-before.jpg",
@@ -395,7 +395,7 @@ const DATA = {
       ["¿Siempre puedo tener implante?","Depende de hueso y salud; lo confirmamos con estudio."]
     ],
     media: {
-      hero: { type: "image", image: "/images/servicios/implantologia-hero.jpg" },
+      hero: { type: "image", image: "/images/servicios/implantologia-1.jpg" },
       gallery: [
         { src: "/images/servicios/implantologia-1.jpg" },
         { src: "/images/servicios/implantologia-2.jpg" }
@@ -432,7 +432,7 @@ const DATA = {
       ["¿Cada cuánto mantenimiento?","Generalmente cada 3–6 meses."]
     ],
     media: {
-      hero: { type: "image", image: "/images/servicios/periodoncia-hero.jpg" },
+      hero: { type: "image", image: "/images/servicios/periodoncia-3.jpg" },
       gallery: [
         { src: "/images/servicios/periodoncia-1.jpg" },
         { src: "/images/servicios/periodoncia-2.jpg" }
@@ -466,7 +466,7 @@ const DATA = {
       ["¿Necesita corona después?","Según pérdida de estructura; se evalúa en consulta."]
     ],
     media: {
-      hero: { type: "image", image: "/images/servicios/endodoncia-hero.jpg" },
+      hero: { type: "image", image: "/images/servicios/endodoncia-3.jpg" },
       gallery: [
         { src: "/images/servicios/endodoncia-1.jpg" },
         { src: "/images/servicios/endodoncia-2.jpg" }
