@@ -1,4 +1,4 @@
-import { useMemo, useRef, useState } from "react"
+import { useMemo, useState } from "react"
 import emailjs from "@emailjs/browser"
 
 const EMAILJS_SERVICE_ID = import.meta.env.VITE_EMAILJS_SERVICE_ID
@@ -23,8 +23,6 @@ function Step({ n, title, desc }) {
 }
 
 export default function AgendarSection() {
-  const formRef = useRef(null)
-
   const minDate = useMemo(() => {
     const d = new Date()
     const mm = String(d.getMonth() + 1).padStart(2, "0")
@@ -36,6 +34,7 @@ export default function AgendarSection() {
   const [ok, setOk] = useState(false)
   const [error, setError] = useState("")
   const [mailWarn, setMailWarn] = useState("")
+  const [formKey, setFormKey] = useState(0) // 👉 fuerza remount del form
 
   async function sendEmails(data, startsISO) {
     if (!EMAILJS_SERVICE_ID || !EMAILJS_TEMPLATE_ID_CLINIC || !EMAILJS_PUBLIC_KEY) {
@@ -60,12 +59,14 @@ export default function AgendarSection() {
     ]
 
     if (EMAILJS_TEMPLATE_ID_USER && data.email) {
-      tasks.push(emailjs.send(
-        EMAILJS_SERVICE_ID,
-        EMAILJS_TEMPLATE_ID_USER,
-        { to_email: data.email, nombre: data.nombre, fecha: data.fecha, hora: data.hora, motivo: data.motivo },
-        EMAILJS_PUBLIC_KEY
-      ))
+      tasks.push(
+        emailjs.send(
+          EMAILJS_SERVICE_ID,
+          EMAILJS_TEMPLATE_ID_USER,
+          { to_email: data.email, nombre: data.nombre, fecha: data.fecha, hora: data.hora, motivo: data.motivo },
+          EMAILJS_PUBLIC_KEY
+        )
+      )
     }
 
     const res = await Promise.allSettled(tasks)
@@ -74,21 +75,19 @@ export default function AgendarSection() {
 
   async function onSubmit(e) {
     e.preventDefault()
-    const formEl = formRef.current // ✅ usa ref estable
     setLoading(true)
     setError("")
     setMailWarn("")
     setOk(false)
 
-    // Toma datos del ref (fallback al evento por si acaso)
-    const form = new FormData(formEl ?? e.currentTarget)
+    const form = new FormData(e.currentTarget)
     const data = Object.fromEntries(form)
 
     // Honeypot
     if (data.website) {
       setOk(true)
       setLoading(false)
-      formEl?.reset() // ✅ seguro
+      setFormKey(k => k + 1) // 👉 limpia el form sin reset()
       return
     }
 
@@ -99,13 +98,12 @@ export default function AgendarSection() {
     if (!data.hora) { setLoading(false); return setError("Selecciona una hora.") }
     if (!data.motivo?.trim()) { setLoading(false); return setError("Selecciona o escribe un motivo.") }
 
-    let clinicOk = false
     try {
       const startsLocal = new Date(`${data.fecha}T${data.hora}:00`)
       const startsISO = startsLocal.toISOString()
 
       const mailRes = await sendEmails(data, startsISO)
-      clinicOk = mailRes.clinic === "fulfilled"
+      const clinicOk = mailRes.clinic === "fulfilled"
       const userOk = mailRes.user === "fulfilled" || mailRes.user === "skipped"
 
       if (!clinicOk) {
@@ -116,18 +114,12 @@ export default function AgendarSection() {
         setMailWarn("Recibimos tu solicitud, pero el correo de confirmación no pudo enviarse.")
       }
 
+      // 👉 limpiar sin reset(): remonte el form
+      setFormKey(k => k + 1)
       setOk(true)
-
-      // ✅ reset seguro y a prueba de re-render
-      try { formEl?.reset() } catch (rErr) { console.warn("No se pudo resetear el formulario:", rErr) }
     } catch (err) {
       console.error("[EmailJS] error:", err)
-      // Si el correo a clínica sí salió, no mostramos error “fuerte”
-      if (clinicOk) {
-        setMailWarn("Tu solicitud llegó, pero hubo un problema visual con el formulario. Puedes ignorar este aviso.")
-      } else {
-        setError("No pudimos enviar tu solicitud. Intenta nuevamente.")
-      }
+      setError("No pudimos enviar tu solicitud. Intenta nuevamente.")
     } finally {
       setLoading(false)
     }
@@ -138,12 +130,16 @@ export default function AgendarSection() {
       <div className="grid lg:grid-cols-2 gap-10 items-start">
         <div>
           <h2 className="text-3xl font-bold text-gray-900 dark:text-white">Agendar en 3 pasos</h2>
-          <p className="mt-2 text-gray-600 dark:text-gray-300">Rápido, sencillo y con confirmación por WhatsApp o llamada.</p>
+          <p className="mt-2 text-gray-600 dark:text-gray-300">
+            Rápido, sencillo y con confirmación por WhatsApp o llamada.
+          </p>
+
           <div className="mt-8 grid gap-4">
             <Step n="1" title="Elige fecha y hora" desc="Selecciona el horario que mejor te acomode." />
             <Step n="2" title="Confirma tus datos" desc="Nombre y teléfono para contactarte." />
             <Step n="3" title="¡Listo!" desc="Te confirmamos por WhatsApp/llamada y te esperamos." />
           </div>
+
           <div className="mt-8 text-sm text-gray-600 dark:text-gray-400">
             ¿Prefieres hablar?{" "}
             <a className="underline text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-200" href="tel:+52 55 5577 0687">Llámanos</a> o por{" "}
@@ -155,7 +151,8 @@ export default function AgendarSection() {
           <p className="text-xl font-semibold text-gray-900 dark:text-white">Solicitar cita</p>
           <p className="text-sm text-gray-600 dark:text-gray-300 mt-1">Te contactamos para confirmar el horario.</p>
 
-          <form ref={formRef} onSubmit={onSubmit} className="mt-6 grid sm:grid-cols-2 gap-4">
+          {/* 👉 key={formKey} fuerza un remount sin usar reset() */}
+          <form key={formKey} onSubmit={onSubmit} className="mt-6 grid sm:grid-cols-2 gap-4">
             {/* Honeypot */}
             <input type="text" name="website" autoComplete="off" tabIndex="-1" aria-hidden="true" style={{ position:'absolute', left:'-9999px' }} />
 
