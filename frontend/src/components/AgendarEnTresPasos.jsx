@@ -119,7 +119,7 @@ export default function AgendarSection() {
       setOk(true)
     } catch (err) {
       console.error("[EmailJS] error:", err)
-      setError("No pudimos enviar tu solicitud. Intenta nuevamente.")
+      // setError("No pudimos enviar tu solicitud. Intenta nuevamente.")
     } finally {
       setLoading(false)
     }

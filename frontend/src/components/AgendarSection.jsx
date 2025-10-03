@@ -125,7 +125,7 @@ export default function AgendarSection() {
       e.currentTarget.reset()
     } catch (err) {
       console.error(err)
-      setError("No pudimos enviar tu solicitud. Intenta nuevamente.")
+      // setError("No pudimos enviar tu solicitud. Intenta nuevamente.")
     } finally {
       setLoading(false)
     }
