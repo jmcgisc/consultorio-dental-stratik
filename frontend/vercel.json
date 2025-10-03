@@ -1,0 +1,27 @@
+{
+  "version": 2,
+ 
+  "rewrites": [
+    { "source": "/(.*)", "destination": "/index.html" }
+  ],
+ 
+  "headers": [
+    {
+      "source": "/assets/(.*)",
+      "headers": [
+        { "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }
+      ]
+    }
+  ],
+ 
+  "redirects": [
+    {
+      "source": "/:path*",
+      "has": [{ "type": "host", "value": "www.especialistasensaludbucal.com" }],
+      "destination": "https://especialistasensaludbucal.com/:path*",
+      "permanent": true
+    }
+  ],
+
+  "trailingSlash": false
+}
