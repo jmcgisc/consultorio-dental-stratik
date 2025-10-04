@@ -350,7 +350,7 @@ export default function Nosotros() {
 
         <header>
           <h1 className="text-4xl md:text-5xl font-extrabold text-neutral-900 dark:text-white tracking-tight">
-            Nuestra misión,
+            Nuestra misión, 
           </h1>
           <p className="mt-3 text-lg text-justify text-neutral-700 dark:text-neutral-300 max-w-2xl leading-relaxed">
             Brindar atención odontológica integral, ética y personalizada, enfocada en la prevención, estética y salud bucal de nuestros pacientes, con tecnología actualizada y un equipo profesional comprometido con su bienestar 🦷🪥
