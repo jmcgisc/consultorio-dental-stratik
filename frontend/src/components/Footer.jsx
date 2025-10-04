@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom"
+
 export default function Footer() {
   const year = new Date().getFullYear()
   return (
@@ -72,31 +74,22 @@ export default function Footer() {
             </div>
           </div>
 
-          {/* Quick Links */}
+          {/* ---- Reemplazo de 'Navegación rápida' por enlace a Nosotros ---- */}
           <div>
             <p className="font-bold text-lg mb-6 text-neutral-800 dark:text-white flex items-center gap-2">
               <span className="w-3 h-0.5 bg-blue-500 rounded-full"></span>
-              Navegación rápida
+              Conócenos
             </p>
-            <div className="grid grid-cols-2 gap-4">
-              {[
-                'Blanqueamiento dental',
-                'Ortodoncia',
-                'Implantes',
-                'Limpieza dental',
-                'Carillas',
-                'Urgencias',
-                'Consulta infantil',
-                'Presupuesto'
-              ].map((service, index) => (
-                <a 
-                  key={index}
-                  href={`/#${service.toLowerCase().replace(' ', '-')}`}
-                  className="text-sm text-neutral-700 dark:text-neutral-300 hover:text-blue-600 dark:hover:text-blue-400 transition-all duration-200 hover:translate-x-1 hover:font-medium"
-                >
-                  {service}
-                </a>
-              ))}
+            <div className="rounded-xl border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-neutral-800 p-5">
+              <p className="text-sm text-neutral-700 dark:text-neutral-300">
+                Descubre nuestras instalaciones, equipo y filosofía de atención.
+              </p>
+              <Link
+                to="/nosotros"
+                className="mt-4 inline-flex items-center justify-center gap-2 px-4 py-2 rounded-lg bg-gradient-to-r from-blue-600 to-purple-600 text-white font-medium hover:from-blue-700 hover:to-purple-700 transition-all shadow"
+              >
+                Ir a la página de Nosotros <span>→</span>
+              </Link>
             </div>
           </div>
 
@@ -168,13 +161,13 @@ export default function Footer() {
           </div>  
           
           <div className="flex items-center gap-2 text-sm text-neutral-500 dark:text-neutral-500">
-                <span>Desarrollado con</span>
-                <span className="text-red-500">❤️</span>
-                <span>por</span>
-                <a href="https://stratik.com.mx" className="font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-                  Stratik
-                </a>
-              </div>
+            <span>Desarrollado con</span>
+            <span className="text-red-500">❤️</span>
+            <span>por</span>
+            <a href="https://stratik.com.mx" className="font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+              Stratik
+            </a>
+          </div>
         </div>
 
         {/* Bottom Bar */}

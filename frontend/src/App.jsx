@@ -15,6 +15,7 @@ import NotFound from "./pages/NotFound.jsx"
 import TrustStrip from "./components/TrustStrip.jsx" 
 import ServicioDetalle from "./pages/ServicioDetalle.jsx"
 import AvisoPrivacidad from "./pages/AvisoPrivacidad.jsx"
+import Nosotros from "./pages/Nosotros.jsx"
 
 
 export default function App() {
@@ -36,6 +37,7 @@ export default function App() {
           <Route path="*" element={<NotFound />} />
           <Route path="/servicios/:slug" element={<ServicioDetalle />} />
           <Route path="/politica-privacidad" element={<AvisoPrivacidad />} />
+          <Route path="/nosotros" element={<Nosotros />} />
 
         </Routes>
       </main>
