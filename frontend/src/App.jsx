@@ -14,6 +14,7 @@ import Terminos from "./pages/Terminos.jsx"          // ← nuevo
 import NotFound from "./pages/NotFound.jsx"
 import TrustStrip from "./components/TrustStrip.jsx" 
 import ServicioDetalle from "./pages/ServicioDetalle.jsx"
+import AvisoPrivacidad from "./pages/AvisoPrivacidad.jsx"
 
 
 export default function App() {
@@ -34,6 +35,8 @@ export default function App() {
           <Route path="/terminos-servicio" element={<Terminos />} />
           <Route path="*" element={<NotFound />} />
           <Route path="/servicios/:slug" element={<ServicioDetalle />} />
+          <Route path="/politica-privacidad" element={<AvisoPrivacidad />} />
+
         </Routes>
       </main>
       <Footer />
