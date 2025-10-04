@@ -1,6 +1,7 @@
 // src/pages/Nosotros.jsx
 import { useEffect, useMemo, useRef, useState } from "react"
 import { Link } from "react-router-dom"
+import SEO from "../components/SEO.jsx"
 
 // Utilidad para clases CSS
 function cn(...classes) { 
@@ -188,125 +189,135 @@ function Carousel({ items = [], startIndex = 0, aspectRatio = "aspect-[16/9]" })
   }
 
   return (
-    <div
-      className="relative rounded-2xl overflow-hidden border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-900 focus:outline-none"
-      tabIndex={0}
-      role="region"
-      aria-roledescription="carrusel"
-      aria-label="Galería de imágenes"
-      aria-live="polite"
-      onKeyDown={onKeyDown}
-      {...swipeHandlers}
-    >
-      {/* Indicador de posición para screen readers */}
-      <div className="sr-only" aria-live="polite" aria-atomic="true">
-        Imagen {currentIndex + 1} de {totalItems}: {items[currentIndex]?.cap}
-      </div>
 
-      {/* Contenedor de slides */}
-      <div className="relative overflow-hidden">
-        <div 
-          className="flex transition-transform duration-500 ease-out" 
-          style={trackStyle}
-          role="list"
-        >
-          {items.map((item, index) => (
-            <figure 
-              key={`${item.src}-${index}`} 
-              className={cn("w-full shrink-0", aspectRatio)}
-              role="listitem"
-              aria-hidden={currentIndex !== index}
-            >
-              <img
-                src={item.src}
-                alt={item.alt || ""}
-                className="h-full w-full object-cover"
-                loading={index === 0 ? "eager" : "lazy"}
-                decoding="async"
-              />
-              {item.cap && (
-                <figcaption className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent px-4 py-3 text-white text-sm font-medium">
-                  {item.cap}
-                </figcaption>
-              )}
-            </figure>
-          ))}
+    <>
+
+      <SEO
+        title="Nosotros"
+        description="Conoce nuestro equipo, filosofía y consultorio. Atención cálida y tecnología de última generación."
+        image="/images/nosotros/equipo-1.jpg"
+      />
+        {/* Contenedor principal del carrusel */}    
+      <div
+        className="relative rounded-2xl overflow-hidden border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-900 focus:outline-none"
+        tabIndex={0}
+        role="region"
+        aria-roledescription="carrusel"
+        aria-label="Galería de imágenes"
+        aria-live="polite"
+        onKeyDown={onKeyDown}
+        {...swipeHandlers}
+      >
+        {/* Indicador de posición para screen readers */}
+        <div className="sr-only" aria-live="polite" aria-atomic="true">
+          Imagen {currentIndex + 1} de {totalItems}: {items[currentIndex]?.cap}
         </div>
 
-        {/* Controles de navegación */}
+        {/* Contenedor de slides */}
+        <div className="relative overflow-hidden">
+          <div 
+            className="flex transition-transform duration-500 ease-out" 
+            style={trackStyle}
+            role="list"
+          >
+            {items.map((item, index) => (
+              <figure 
+                key={`${item.src}-${index}`} 
+                className={cn("w-full shrink-0", aspectRatio)}
+                role="listitem"
+                aria-hidden={currentIndex !== index}
+              >
+                <img
+                  src={item.src}
+                  alt={item.alt || ""}
+                  className="h-full w-full object-cover"
+                  loading={index === 0 ? "eager" : "lazy"}
+                  decoding="async"
+                />
+                {item.cap && (
+                  <figcaption className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent px-4 py-3 text-white text-sm font-medium">
+                    {item.cap}
+                  </figcaption>
+                )}
+              </figure>
+            ))}
+          </div>
+
+          {/* Controles de navegación */}
+          {totalItems > 1 && (
+            <>
+              <button
+                type="button"
+                aria-label="Imagen anterior"
+                onClick={goToPrevious}
+                className="absolute left-3 top-1/2 -translate-y-1/2 inline-flex h-10 w-10 items-center justify-center rounded-full bg-white/90 dark:bg-neutral-900/90 text-neutral-800 dark:text-neutral-100 shadow-lg hover:bg-white dark:hover:bg-neutral-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 transition-all duration-200 hover:scale-105"
+                disabled={isTransitioning}
+              >
+                ‹
+              </button>
+              <button
+                type="button"
+                aria-label="Siguiente imagen"
+                onClick={goToNext}
+                className="absolute right-3 top-1/2 -translate-y-1/2 inline-flex h-10 w-10 items-center justify-center rounded-full bg-white/90 dark:bg-neutral-900/90 text-neutral-800 dark:text-neutral-100 shadow-lg hover:bg-white dark:hover:bg-neutral-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 transition-all duration-200 hover:scale-105"
+                disabled={isTransitioning}
+              >
+                ›
+              </button>
+            </>
+          )}
+        </div>
+
+        {/* Indicadores de posición (dots) */}
         {totalItems > 1 && (
-          <>
-            <button
-              type="button"
-              aria-label="Imagen anterior"
-              onClick={goToPrevious}
-              className="absolute left-3 top-1/2 -translate-y-1/2 inline-flex h-10 w-10 items-center justify-center rounded-full bg-white/90 dark:bg-neutral-900/90 text-neutral-800 dark:text-neutral-100 shadow-lg hover:bg-white dark:hover:bg-neutral-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 transition-all duration-200 hover:scale-105"
-              disabled={isTransitioning}
-            >
-              ‹
-            </button>
-            <button
-              type="button"
-              aria-label="Siguiente imagen"
-              onClick={goToNext}
-              className="absolute right-3 top-1/2 -translate-y-1/2 inline-flex h-10 w-10 items-center justify-center rounded-full bg-white/90 dark:bg-neutral-900/90 text-neutral-800 dark:text-neutral-100 shadow-lg hover:bg-white dark:hover:bg-neutral-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 transition-all duration-200 hover:scale-105"
-              disabled={isTransitioning}
-            >
-              ›
-            </button>
-          </>
+          <div className="absolute bottom-3 left-0 right-0 flex justify-center gap-2" role="tablist">
+            {items.map((_, index) => (
+              <button
+                key={index}
+                role="tab"
+                aria-label={`Ir a la imagen ${index + 1}`}
+                aria-selected={currentIndex === index}
+                onClick={() => goToSlide(index)}
+                className={cn(
+                  "h-2.5 rounded-full transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500",
+                  currentIndex === index 
+                    ? "bg-white dark:bg-neutral-100 w-6" 
+                    : "bg-white/60 dark:bg-neutral-400/60 hover:bg-white w-2.5"
+                )}
+              />
+            ))}
+          </div>
+        )}
+
+        {/* Miniaturas */}
+        {totalItems > 1 && (
+          <div className="grid grid-cols-4 gap-2 p-3 border-t border-neutral-200 dark:border-neutral-800 bg-white/80 dark:bg-neutral-900/80 backdrop-blur-sm">
+            {items.map((item, index) => (
+              <button
+                key={`${item.src}-thumb-${index}`}
+                onClick={() => goToSlide(index)}
+                className={cn(
+                  "relative aspect-[4/3] overflow-hidden rounded-lg ring-2 transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500",
+                  currentIndex === index 
+                    ? "ring-blue-500 scale-105" 
+                    : "ring-transparent hover:ring-neutral-300 dark:hover:ring-neutral-700 hover:scale-105"
+                )}
+                aria-label={`Ver imagen ${index + 1}: ${item.cap}`}
+                disabled={isTransitioning}
+              >
+                <img 
+                  src={item.src} 
+                  alt="" 
+                  className="h-full w-full object-cover" 
+                  loading="lazy"
+                  decoding="async"
+                />
+              </button>
+            ))}
+          </div>
         )}
       </div>
-
-      {/* Indicadores de posición (dots) */}
-      {totalItems > 1 && (
-        <div className="absolute bottom-3 left-0 right-0 flex justify-center gap-2" role="tablist">
-          {items.map((_, index) => (
-            <button
-              key={index}
-              role="tab"
-              aria-label={`Ir a la imagen ${index + 1}`}
-              aria-selected={currentIndex === index}
-              onClick={() => goToSlide(index)}
-              className={cn(
-                "h-2.5 rounded-full transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500",
-                currentIndex === index 
-                  ? "bg-white dark:bg-neutral-100 w-6" 
-                  : "bg-white/60 dark:bg-neutral-400/60 hover:bg-white w-2.5"
-              )}
-            />
-          ))}
-        </div>
-      )}
-
-      {/* Miniaturas */}
-      {totalItems > 1 && (
-        <div className="grid grid-cols-4 gap-2 p-3 border-t border-neutral-200 dark:border-neutral-800 bg-white/80 dark:bg-neutral-900/80 backdrop-blur-sm">
-          {items.map((item, index) => (
-            <button
-              key={`${item.src}-thumb-${index}`}
-              onClick={() => goToSlide(index)}
-              className={cn(
-                "relative aspect-[4/3] overflow-hidden rounded-lg ring-2 transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500",
-                currentIndex === index 
-                  ? "ring-blue-500 scale-105" 
-                  : "ring-transparent hover:ring-neutral-300 dark:hover:ring-neutral-700 hover:scale-105"
-              )}
-              aria-label={`Ver imagen ${index + 1}: ${item.cap}`}
-              disabled={isTransitioning}
-            >
-              <img 
-                src={item.src} 
-                alt="" 
-                className="h-full w-full object-cover" 
-                loading="lazy"
-                decoding="async"
-              />
-            </button>
-          ))}
-        </div>
-      )}
-    </div>
+    </>
   )
 }
 
