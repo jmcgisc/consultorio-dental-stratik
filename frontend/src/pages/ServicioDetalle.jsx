@@ -447,14 +447,13 @@ const DATA = {
     title: "Odontopediatría",
     short: "La odontopediatría es la especialidad de la odontología que se encarga de la prevención, diagnóstico y tratamiento de las enfermedades bucales en bebés, niños y adolescentes, incluyendo a pacientes con necesidades especiales.",
     queHace: "Controla el crecimiento y desarrollo bucodental desde la infancia.",
-
-trata: [
+    trata: [
       "Atiende la erupción de dientes temporales y permanentes.",
       "Trata caries infantiles, traumatismos dentales y maloclusiones.",
       "Aplica fluor, selladores y otros tratamientos preventivos.",
       "Enseña hábitos de higiene oral adecuados desde temprana edad.",
-      "Maneja la consulta con técnicas psicológicas para evitar el miedo dental.  ",
-      "Deriva a otras especialidades cuando es necesario (ortodoncia, cirugía, etc.).Acompaña el crecimiento bucodental con medidas preventivas, tratamientos conservadores y educación a padres e hijos.",
+      "Maneja la consulta con técnicas psicológicas para evitar el miedo dental.",
+      "Deriva a otras especialidades cuando es necesario (ortodoncia, cirugía, etc.).Acompaña el crecimiento bucodental con medidas preventivas, tratamientos conservadores y educación a padres e hijos."
     ],
     procedimiento: [
       "Valoración pediátrica y adaptación del niño",
@@ -541,7 +540,7 @@ trata: [
       "Realiza la colocación quirúrgica de los implantes dentales.",
       "Planifica y coloca las coronas, puentes o prótesis que se fijarán sobre los implantes. ",
       "Puede realizar injertos óseos o elevaciones de seno si hay pérdida ósea.",
-      "Trabaja en conjunto con otras especialidades (prótesis, periodoncia, cirugía)",
+      "Trabaja en conjunto con otras especialidades (prótesis, periodoncia, cirugía)"
     ],
     procedimiento: [
       "Estudio 3D/guía quirúrgica (si aplica)",
@@ -559,7 +558,7 @@ trata: [
       "Ayudan a preservar el hueso y evitar su reabsorción ",
       "No afectan dientes vecinos (a diferencia de los puentes tradicionales)  ",
       "Permiten masticar, hablar y sonreír con confianza ",
-      "Son de larga duración si se cuidan adecuadamente",
+      "Son de larga duración si se cuidan adecuadamente"
     ],
     incluye: ["Estudio 3D","Colocación del implante","Pilar y corona (según plan)"],
     faq: [
@@ -586,11 +585,11 @@ trata: [
     short: "La periodoncia es la especialidad de la odontología que se encarga de la prevención, diagnóstico y tratamiento de las enfermedades de los tejidos que rodean y soportan los dientes, principalmente la encía y el hueso alveolar.",
     queHace: "Previene, diagnostica y trata la enfermedad periodontal para preservar el soporte del diente y la salud de las encías.",
     trata: [
-        "Gingivitis: inflamación y sangrado de encías por acumulación de placa.  ",
-        "Periodontitis: infección más profunda que causa pérdida de hueso y movilidad dental.  ",
-        "Recesión de encías, bolsas periodontales y mal aliento crónico. ",
-        "Cirugías periodontales: para regenerar hueso, corregir encía retraída o preparar para implantes. ",
-        "Mantenimiento periodontal: limpiezas profundas periódicas para evitar recaídas.",
+      "Gingivitis: inflamación y sangrado de encías por acumulación de placa.",
+      "Periodontitis: infección más profunda que causa pérdida de hueso y movilidad dental.",
+      "Recesión de encías, bolsas periodontales y mal aliento crónico.",
+      "Cirugías periodontales: para regenerar hueso, corregir encía retraída o preparar para implantes.",
+      "Mantenimiento periodontal: limpiezas profundas periódicas para evitar recaídas."
     ],
     procedimiento: [
       "Valoración periodontal y sondaje",
@@ -603,12 +602,11 @@ trata: [
     bgGradient: "from-emerald-50 to-teal-50",
     Icon: IconPeriodoncia,
     beneficios: [
-
       "Disminuye inflamación y sangrado",
       "Conservar los dientes naturales el mayor tiempo posible.",
       "Eliminar infecciones y mejorar la salud de las encías.",
-      "Prevenir la pérdida dental. ",
-      "Garantizar una base saludable para prótesis o implantes.",
+      "Prevenir la pérdida dental.",
+      "Garantizar una base saludable para prótesis o implantes."
     ],
     incluye: [
       "Valoración periodontal",
@@ -634,13 +632,13 @@ trata: [
     id: "servicio-endodoncia",
     title: "Endodoncia",
     short: "La endodoncia es la especialidad de la odontología que se encarga del diagnóstico y tratamiento de las enfermedades de la pulpa dental (el nervio del diente) y de los tejidos que rodean la raíz.Diagnóstico y tratamiento de las enfermedades de la pulpa (nervio) y de los tejidos perirradiculares.La endodoncia es la especialidad de la odontología que se encarga del diagnóstico y tratamiento de las enfermedades de la pulpa dental (el nervio del diente) y de los tejidos que rodean la raíz.",
-    queHace: "Realiza tratamientos de conductos (endodoncia), que consisten en: Remover el nervio dañado, inflamado o infectado Limpiar, desinfectar y sellar los conductos radiculares  ",
+    queHace: "Realiza tratamientos de conductos (endodoncia), que consisten en: Remover el nervio dañado, inflamado o infectado Limpiar, desinfectar y sellar los conductos radiculares",
     trata: [
       "Caries profundas que llegan al nervio",
-      "Fracturas dentales con exposición pulpar ",
+      "Fracturas dentales con exposición pulpar",
       "Dolor dental severo",
       "Abscesos o infecciones en la raíz",
-      "Retratamientos de endodoncia ",
+      "Retratamientos de endodoncia"
     ],
     procedimiento: [
       "Anestesia y aislamiento absoluto",
@@ -654,10 +652,10 @@ trata: [
     bgGradient: "from-blue-50 to-cyan-50",
     Icon: IconEndodoncia,
     beneficios: [
-      "Eliminar el dolor  ",
-      "Preservar el diente natural  ",
-      "Evitar extracciones innecesarias  ",
-      "Restaurar la función masticatoria",
+      "Eliminar el dolor",
+      "Preservar el diente natural",
+      "Evitar extracciones innecesarias",
+      "Restaurar la función masticatoria"
     ],
     incluye: [
       "Aislamiento absoluto",
@@ -672,13 +670,12 @@ trata: [
     media: {
       hero: { type: "image", image: "/images/servicios/endodoncia-3.jpg" },
       gallery: [
-        { src: "/images/servicios/endodoncia-1.jpg" },
-        { src: "/images/servicios/endodoncia-2.jpg" }
+        { src: "/images/servicios/endodoncia-1.jpg" }
       ],
       beforeAfter: null,
       videos: []
     }
-  },
+  }
 }
 
 /* =========================
@@ -711,13 +708,16 @@ export default function ServicioDetalle() {
     <>
       {/* HERO con media */}
       <section className="relative isolate overflow-hidden">
-        {/* fondo media */}
         <HeroMedia media={s.media?.hero} />
+
+        {/* Overlay para legibilidad */}
+        <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-black/55 via-black/35 to-black/10" />
+
         {/* degradado de marca */}
         <div className={`absolute inset-0 -z-10 bg-gradient-to-br ${s.bgGradient} mix-blend-multiply`} />
 
-        <div className="container-px py-10">
-          <nav className="text-sm mb-4 text-neutral-100 drop-shadow">
+        <div className="container-px py-10 relative">
+          <nav className="text-sm mb-4 text-white/90 drop-shadow">
             <Link to="/" className="hover:underline">Inicio</Link> <span className="mx-1">/</span>
             <Link to="/servicios" className="hover:underline">Servicios</Link> <span className="mx-1">/</span>
             <span className="text-white">{s.title}</span>
@@ -729,18 +729,21 @@ export default function ServicioDetalle() {
             </div>
             <div>
               <h1 className="text-3xl sm:text-4xl font-extrabold text-white drop-shadow">{s.title}</h1>
+
               {s.short && (
-                <p className="mt-2 text-neutral-100/95 max-w-2xl drop-shadow">{s.short}</p>
+                <p className="mt-2 max-w-2xl text-white/95 drop-shadow">
+                  {s.short}
+                </p>
               )}
 
               <div className="mt-3 flex flex-wrap gap-2 text-sm">
                 {s.priceFrom && (
-                  <span className="inline-flex px-2.5 py-1 rounded-full bg-white/90 text-neutral-900 ring-1 ring-neutral-200">
+                  <span className="inline-flex px-2.5 py-1 rounded-full bg-white/95 text-neutral-900 ring-1 ring-neutral-200">
                     Desde {typeof s.priceFrom === "number" ? `$${s.priceFrom} MXN` : s.priceFrom}
                   </span>
                 )}
                 {s.duration && (
-                  <span className="inline-flex px-2.5 py-1 rounded-full bg-white/90 text-neutral-900 ring-1 ring-neutral-200">
+                  <span className="inline-flex px-2.5 py-1 rounded-full bg-white/95 text-neutral-900 ring-1 ring-neutral-200">
                     {s.duration} aprox.
                   </span>
                 )}
@@ -749,10 +752,12 @@ export default function ServicioDetalle() {
               <div className="mt-5 flex flex-wrap gap-3">
                 <a href="/#agendar" className="btn btn-primary">Agendar valoración</a>
                 <a
-                  className="btn"
-                  href={`https://wa.me/521000000000?text=Hola,%20quiero%20informes%20sobre%20${encodeURIComponent(s.title)}`}
+                  className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-[#25D366] text-white font-semibold shadow-md hover:shadow-lg hover:bg-[#1ebe57] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#25D366]/60 transition-colors"
+                  href={`https://wa.me/5215560910802?text=Hola,%20quiero%20informes%20sobre%20${encodeURIComponent(s.title)}`}
                   target="_blank" rel="noreferrer"
+                  aria-label="Chatear por WhatsApp"
                 >
+                  <span>💬</span>
                   WhatsApp
                 </a>
               </div>
@@ -766,55 +771,49 @@ export default function ServicioDetalle() {
         {/* principal */}
         <div className="lg:col-span-2 space-y-8">
 
-          {/* ¿Qué hace [la especialidad]? (fallback a short) */}
           {(s.queHace || s.short) && (
             <div className="card">
-              <h2 className="text-xl font-semibold">
+              <h2 className="text-xl font-semibold text-neutral-900 dark:text-white">
                 ¿Qué hace {s.title?.toLowerCase?.() || "esta especialidad"}?
               </h2>
-              <p className="mt-3 text-neutral-700 dark:text-neutral-200">
+              <p className="mt-3 text-neutral-800 dark:text-neutral-200">
                 {s.queHace || s.short}
               </p>
             </div>
           )}
 
-          {/* Trata */}
           {Array.isArray(s.trata) && s.trata.length > 0 && (
             <div className="card">
-              <h2 className="text-xl font-semibold">Trata</h2>
-              <ul className="mt-3 list-disc pl-5 space-y-1 text-neutral-700 dark:text-neutral-200">
+              <h2 className="text-xl font-semibold text-neutral-900 dark:text-white">Trata</h2>
+              <ul className="mt-3 list-disc pl-5 space-y-1 text-neutral-800 dark:text-neutral-200">
                 {s.trata.map(item => <li key={item}>{item}</li>)}
               </ul>
             </div>
           )}
 
-          {/* Beneficios */}
           {Array.isArray(s.beneficios) && s.beneficios.length > 0 && (
             <div className="card">
-              <h2 className="text-xl font-semibold">Beneficios</h2>
-              <ul className="mt-3 list-disc pl-5 space-y-1 text-neutral-700 dark:text-neutral-200">
+              <h2 className="text-xl font-semibold text-neutral-900 dark:text-white">Beneficios</h2>
+              <ul className="mt-3 list-disc pl-5 space-y-1 text-neutral-800 dark:text-neutral-200">
                 {s.beneficios.map((b) => <li key={b}>{b}</li>)}
               </ul>
             </div>
           )}
 
-          {/* Before/After */}
           {s.media?.beforeAfter && <BeforeAfter {...s.media.beforeAfter} />}
 
-          {/* ¿Cómo es el procedimiento? */}
           {Array.isArray(s.procedimiento) && s.procedimiento.length > 0 && (
             <div className="card">
-              <h2 className="text-xl font-semibold">¿Cómo es el procedimiento?</h2>
-              <ol className="mt-3 list-decimal pl-5 space-y-2 text-neutral-700 dark:text-neutral-200">
+              <h2 className="text-xl font-semibold text-neutral-900 dark:text-white">¿Cómo es el procedimiento?</h2>
+              <ol className="mt-3 list-decimal pl-5 space-y-2 text-neutral-800 dark:text-neutral-200">
                 {s.procedimiento.map(p => <li key={p}>{p}</li>)}
               </ol>
             </div>
           )}
 
-          {/* Videos */}
           {Array.isArray(s.media?.videos) && s.media.videos.length > 0 && (
             <div className="space-y-4">
-              <h2 className="text-xl font-semibold">Videos</h2>
+              <h2 className="text-xl font-semibold text-neutral-900 dark:text-white">Videos</h2>
               <div className="grid sm:grid-cols-2 gap-4">
                 {s.media.videos.map((v) => (
                   <VideoPlayer key={v.mp4 || v.webm || v.poster} {...v} />
@@ -826,33 +825,32 @@ export default function ServicioDetalle() {
 
         {/* lateral */}
         <aside className="space-y-6">
-          {/* Galería */}
           {Array.isArray(s.media?.gallery) && s.media.gallery.length > 0 && (
             <div>
-              <h3 className="font-semibold mb-3">Galería</h3>
+              <h3 className="font-semibold text-neutral-900 dark:text-white mb-3">Galería</h3>
               <MediaGallery items={s.media.gallery} />
             </div>
           )}
 
-          {/* Dudas frecuentes */}
           {Array.isArray(s.faq) && s.faq.length > 0 && (
             <div className="card">
-              <h3 className="font-semibold">Dudas frecuentes</h3>
+              <h3 className="font-semibold text-neutral-900 dark:text-white">Dudas frecuentes</h3>
               <div className="mt-3 space-y-3">
                 {s.faq.map(([q, a]) => (
                   <details key={q} className="group">
-                    <summary className="cursor-pointer font-medium">{q}</summary>
-                    <p className="mt-1 text-sm text-neutral-700 dark:text-neutral-300">{a}</p>
+                    <summary className="cursor-pointer font-medium text-neutral-900 dark:text-neutral-100 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
+                      {q}
+                    </summary>
+                    <p className="mt-1 text-sm text-neutral-800 dark:text-neutral-300">{a}</p>
                   </details>
                 ))}
               </div>
             </div>
           )}
 
-          {/* Financiación */}
           <div className="card">
-            <h3 className="font-semibold">Financiación</h3>
-            <p className="mt-2 text-sm text-neutral-700 dark:text-neutral-300">
+            <h3 className="font-semibold text-neutral-900 dark:text-white">Financiación</h3>
+            <p className="mt-2 text-sm text-neutral-800 dark:text-neutral-300">
               Contamos con opciones de pago y planes mensuales. Consulta términos en clínica.
             </p>
             <a href="/#agendar" className="btn btn-primary mt-3">Solicitar plan</a>
