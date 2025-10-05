@@ -17,7 +17,6 @@ import ServicioDetalle from "./pages/ServicioDetalle.jsx"
 import AvisoPrivacidad from "./pages/AvisoPrivacidad.jsx"
 import Nosotros from "./pages/Nosotros.jsx"
 
-
 export default function App() {
   useHashScroll()
   return (
