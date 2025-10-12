@@ -130,7 +130,7 @@ export default function QueNecesitasHoy() {
               <p className="font-semibold">{item.t}</p>
             </div>
             <p className="mt-2 text-sm text-neutral-600 dark:text-neutral-300">{item.d}</p>
-            <span className="mt-3 inline-block text-sm text-brand-700 group-hover:underline">Ver más →</span>
+            <span className="mt-3 inline-block text-sm text-brand-300 group-hover:underline">Ver más →</span>
           </Link>
         ))}
       </div>
@@ -209,7 +209,7 @@ export default function QueNecesitasHoy() {
                 <button
                   type="button"
                   onClick={() => setOpen(false)}
-                  className="btn"
+                  className="btn text-white"
                 >
                   Cancelar
                 </button>

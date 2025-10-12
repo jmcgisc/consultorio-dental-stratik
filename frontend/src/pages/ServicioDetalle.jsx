@@ -3,7 +3,7 @@ import { Link, useParams } from "react-router-dom"
 import { useEffect } from "react"
 import HeroMedia from "../components/HeroMedia.jsx"
 import VideoPlayer from "../components/VideoPlayer.jsx"
-import BeforeAfter from "../components/BeforeAfter.jsx"
+import BeforeAfterServicios from "../components/BeforeAfterServicios.jsx"
 import MediaGallery from "../components/MediaGallery.jsx"
 import AgendarEnServicios from "../components/AgendarEnServicios.jsx"
 
@@ -390,8 +390,8 @@ const DATA = {
         { src: "/images/servicios/odontologia-2.jpg", alt: "Blanqueamiento" }
       ],
       beforeAfter: {
-        before: "/images/servicios/estetica-before.jpg",
-        after:  "/images/servicios/estetica-after.jpg"
+        before: "/images/servicios/estetica-before.jpeg",
+        after:  "/images/servicios/estetica-after.jpeg"
       },
       videos: []
     }
@@ -524,8 +524,8 @@ const DATA = {
         { src: "/images/servicios/ortodoncia-2.jpg" }
       ],
       beforeAfter: {
-        before: "/images/servicios/ortodoncia-general-before.jpg",
-        after:  "/images/servicios/ortodoncia-general-after.jpg"
+        before: "/images/servicios/ortodoncia-before.jpeg",
+        after:  "/images/servicios/ortodoncia-after.jpeg"
       },
       videos: []
     }
@@ -799,8 +799,12 @@ export default function ServicioDetalle() {
               </ul>
             </div>
           )}
-
-          {s.media?.beforeAfter && <BeforeAfter {...s.media.beforeAfter} />}
+            {s.media?.beforeAfter && (
+              <BeforeAfterServicios
+                {...s.media.beforeAfter}
+                sensitiveContent={true} // Activa advertencias sensibles
+              />
+            )}
 
           {Array.isArray(s.procedimiento) && s.procedimiento.length > 0 && (
             <div className="card">

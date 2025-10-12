@@ -209,11 +209,6 @@ export default function Navbar() {
                       <span className="w-2 h-2 bg-teal-500 rounded-full"></span>
                       <span>Perodoncia</span>
                     </a>
-                    {/* Repetido a solicitud: Ortodoncia */}
-                    <a className="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-indigo-50 dark:hover:bg-indigo-900/20 text-neutral-700 dark:text-neutral-300 hover:text-indigo-600 transition-all" href={anchors.ortodonciaGeneral} onClick={() => setServicesOpen(false)}>
-                      <span className="w-2 h-2 bg-indigo-500 rounded-full"></span>
-                      <span>Ortodoncia</span>
-                    </a>
                   </div>
                 </div>
               )}

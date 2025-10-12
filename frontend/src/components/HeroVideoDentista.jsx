@@ -129,9 +129,9 @@ export default function HeroVideoDentista() {
           {/* Lista de beneficios mejorada */}
           <div className="mt-12 grid grid-cols-1 sm:grid-cols-3 gap-6 max-w-24xl">
             {[
-              { icon: '⚡', text: 'Citas el mismo día', subtext: 'Disponibilidad inmediata' },
-              { icon: '💳', text: 'Aceptamos tarjetas', subtext: 'Hasta 12 meses sin intereses' },
-              { icon: '🅿️', text: 'Parking accesible', subtext: 'Comodidad garantizada' }
+              { icon: '⚡', text: 'Atendemos urgencias' },
+              { icon: '💳', text: 'Aceptamos tarjetas' },
+              // { icon: '🅿️', text: 'Parking accesible', subtext: 'Comodidad garantizada' }
             ].map((benefit, index) => (
               <div 
                 key={index}
