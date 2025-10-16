@@ -336,8 +336,8 @@ const DATA = {
         { src: "/images/servicios/protesis-2.jpg", alt: "Puente fijo" }
       ],
       beforeAfter: {
-        before: "/images/servicios/protesis-before.jpg",
-        after:  "/images/servicios/protesis-after.jpg",
+        before: "/images/servicios/protesis-before.jpeg",
+        after:  "/images/servicios/protesis-after.jpeg",
         labelBefore: "Antes",
         labelAfter: "Después"
       },
@@ -852,13 +852,13 @@ export default function ServicioDetalle() {
             </div>
           )}
 
-          <div className="card">
+          {/* <div className="card">
             <h3 className="font-semibold text-neutral-900 dark:text-white">Financiación</h3>
             <p className="mt-2 text-sm text-neutral-800 dark:text-neutral-300">
               Contamos con opciones de pago y planes mensuales. Consulta términos en clínica.
             </p>
             <a href="/#agendar" className="btn btn-primary mt-3">Solicitar plan</a>
-          </div>
+          </div> */}
         </aside>
       </section>
 
