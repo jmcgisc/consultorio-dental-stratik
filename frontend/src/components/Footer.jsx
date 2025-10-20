@@ -106,8 +106,8 @@ export default function Footer() {
                 </div>
                 <div>
                   <div className="font-semibold text-neutral-700 dark:text-neutral-300">WhatsApp</div>
-                  <a href="https://wa.me/521000000000" className="text-sm text-green-600 dark:text-green-400 hover:underline">
-                    +52 55 5577 0687
+                  <a href="https://wa.me/5215560910802" className="text-sm text-green-600 dark:text-green-400 hover:underline">
+                    +52 55 6091 0802
                   </a>
                 </div>
               </div>
@@ -118,8 +118,8 @@ export default function Footer() {
                 </div>
                 <div>
                   <div className="font-semibold text-neutral-700 dark:text-neutral-300">Teléfono</div>
-                  <a href="tel:+525500000000" className="text-sm text-blue-600 dark:text-blue-400 hover:underline">
-                    +52 1 55 6091 0802
+                  <a href="tel:+525555770687" className="text-sm text-blue-600 dark:text-blue-400 hover:underline">
+                    +52 55 5577 0687
                   </a>
                 </div>
               </div>

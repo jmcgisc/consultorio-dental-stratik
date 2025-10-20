@@ -115,7 +115,7 @@ const DATA = {
       "Pulido con pastas profilácticas",
       "Enjuague y plan de cuidado domiciliario"
     ],
-    priceFrom: 650,
+    priceFrom: 800,
     duration: "30–45 min",
     gradient: "from-blue-600 to-cyan-600",
     bgGradient: "from-blue-50 to-cyan-50",
@@ -223,7 +223,7 @@ const DATA = {
       "Modelado, fotocurado y pulido",
       "En coronas: toma de impresión/escaneo y colocación"
     ],
-    priceFrom: 1200,
+    priceFrom: 800,
     duration: "45–90 min",
     gradient: "from-emerald-600 to-teal-600",
     bgGradient: "from-emerald-50 to-teal-50",
@@ -235,8 +235,7 @@ const DATA = {
     ],
     incluye: ["Valoración y colorimetría","Aislamiento y adhesión","Pulido final estético"],
     faq: [
-      ["¿Cuánto dura una resina?","Con buena higiene y control, puede durar varios años."],
-      ["¿Coronas en un día?","Depende del laboratorio y tu caso clínico."]
+      ["¿Cuánto dura una resina?","En condiciones adecuadas de cuidado, puede durar hasta 7 años."],
     ],
     media: {
       hero: { type: "video", mp4: "/videos/servicios/resinas_coronas.mp4", poster: "/images/servicios/implantes-hero.jpg", image: "/images/servicios/implantes-hero.jpg" },
@@ -264,8 +263,7 @@ const DATA = {
       "Cicatrización e integración ósea",
       "Colocación de pilar y corona definitiva"
     ],
-    priceFrom: "consulta",
-    duration: "2–4 meses",
+    priceFrom: "consulta", 
     gradient: "from-orange-600 to-red-600",
     bgGradient: "from-orange-50 to-red-50",
     Icon: IconImplante,
@@ -281,7 +279,7 @@ const DATA = {
     incluye: ["Estudio radiográfico/3D","Plan quirúrgico","Corona sobre implante (según plan)"],
     faq: [
       ["¿Soy candidato?","Se confirma con valoración clínica e imagen (hueso, encía, salud)."],
-      ["¿Cuánto tarda?","Entre 2–4 meses en promedio, dependiendo del caso."]
+      ["¿Cuánto tarda?","6 meses en promedio, dependiendo del caso."]
     ],
     media: {
       hero: { type: "video", mp4: "/videos/servicios/implantes-hero.mp4", poster: "/images/servicios/implantes-hero.jpg", image: "/images/servicios/implantes-hero.jpg" },
@@ -357,12 +355,12 @@ const DATA = {
       "Reconstrucciones con resinas estéticas  ",
       "Coronas libres de metal o de alta estética  ",
     ],
-    procedimiento: [
-      "Análisis fotográfico/Digital Smile Design",
-      "Selección de tono y mock-up",
-      "Carillas/contorneado o blanqueamiento guiado",
-      "Pulido y mantenimiento"
-    ],
+    // procedimiento: [
+    //   "Análisis fotográfico/Digital Smile Design",
+    //   "Selección de tono y mock-up",
+    //   "Carillas/contorneado o blanqueamiento guiado",
+    //   "Pulido y mantenimiento"
+    // ],
     priceFrom: "consulta",
     duration: "1–3 citas",
     gradient: "from-pink-600 to-fuchsia-600",
@@ -432,10 +430,10 @@ const DATA = {
       ["¿Puedo trabajar al día siguiente?","Depende del caso y el tipo de cirugía; lo indicamos en consulta."]
     ],
     media: {
-      hero: { type: "image", image: "/images/servicios/odontologia-2.jpg" },
+      hero: { type: "image", image: "/images/servicios/cirugia-3.jpeg" },
       gallery: [
-        { src: "/images/servicios/odontologia-1.jpg" },
-        { src: "/images/servicios/odontologia-2.jpg" }
+        { src: "/images/servicios/cirugia-1.jpeg" },
+        { src: "/images/servicios/cirugia-2.jpeg" }
       ],
       beforeAfter: null,
       videos: []
@@ -476,10 +474,10 @@ const DATA = {
       ["¿Cada cuánto es el control?","Cada 6 meses, o antes si hay dolor o cambios en la mordida."]
     ],
     media: {
-      hero: { type: "image", image: "/images/servicios/odontopediatria-3.jpg" },
+      hero: { type: "image", image: "/images/servicios/odontopediatria-2.jpeg" },
       gallery: [
-        { src: "/images/servicios/odontopediatria-1.jpg" },
-        { src: "/images/servicios/odontopediatria-2.jpg" }
+        { src: "/images/servicios/odontopediatria-3.jpeg" },
+        { src: "/images/servicios/odontopediatria-2.jpeg" }
       ],
       beforeAfter: null,
       videos: []
@@ -668,9 +666,9 @@ const DATA = {
       ["¿Necesitaré corona?","Frecuente en dientes con gran destrucción; lo valoramos caso a caso."]
     ],
     media: {
-      hero: { type: "image", image: "/images/servicios/endodoncia-3.jpg" },
+      hero: { type: "image", image: "/images/servicios/endodoncia-1.jpeg" },
       gallery: [
-        { src: "/images/servicios/endodoncia-1.jpg" }
+        { src: "/images/servicios/endodoncia-1.jpeg" }
       ],
       beforeAfter: null,
       videos: []
@@ -735,7 +733,7 @@ export default function ServicioDetalle() {
                   {s.short}
                 </p>
               )}
-
+{/* 
               <div className="mt-3 flex flex-wrap gap-2 text-sm">
                 {s.priceFrom && (
                   <span className="inline-flex px-2.5 py-1 rounded-full bg-white/95 text-neutral-900 ring-1 ring-neutral-200">
@@ -747,7 +745,7 @@ export default function ServicioDetalle() {
                     {s.duration} aprox.
                   </span>
                 )}
-              </div>
+              </div> */}
 
               <div className="mt-5 flex flex-wrap gap-3">
                 <a href="/#agendar" className="btn btn-primary">Agendar valoración</a>
@@ -776,7 +774,7 @@ export default function ServicioDetalle() {
               <h2 className="text-xl font-semibold text-neutral-900 dark:text-white">
                 ¿Qué hace {s.title?.toLowerCase?.() || "esta especialidad"}?
               </h2>
-              <p className="mt-3 text-neutral-800 dark:text-neutral-200">
+              <p className="mt-3 text-neutral-600 dark:text-neutral-200">
                 {s.queHace || s.short}
               </p>
             </div>
