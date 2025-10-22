@@ -8,47 +8,36 @@ export default function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false)
   const [servicesOpen, setServicesOpen] = useState(false)
   const [closeTimeout, setCloseTimeout] = useState(null)
-  
   const dropdownRef = useRef(null)
   const dropdownContentRef = useRef(null)
 
-  // Efecto para detectar scroll
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20)
     window.addEventListener('scroll', onScroll, { passive: true })
     return () => window.removeEventListener('scroll', onScroll)
   }, [])
 
-  // Cerrar menús al cambiar de ruta
   useEffect(() => {
     setMobileOpen(false)
     setServicesOpen(false)
   }, [location.pathname])
 
-  // Event listeners para cerrar dropdowns
   useEffect(() => {
     function onDocClick(e) {
       if (!dropdownRef.current) return
       if (!dropdownRef.current.contains(e.target)) setServicesOpen(false)
     }
-    
     function onEsc(e) {
-      if (e.key === 'Escape') { 
-        setServicesOpen(false)
-        setMobileOpen(false) 
-      }
+      if (e.key === 'Escape') { setServicesOpen(false); setMobileOpen(false) }
     }
-    
     document.addEventListener('click', onDocClick)
     document.addEventListener('keydown', onEsc)
-    
     return () => {
       document.removeEventListener('click', onDocClick)
       document.removeEventListener('keydown', onEsc)
     }
   }, [])
 
-  // Handlers para hover del dropdown
   const handleMouseEnter = () => {
     if (closeTimeout) {
       clearTimeout(closeTimeout)
@@ -78,18 +67,17 @@ export default function Navbar() {
     setCloseTimeout(timeout)
   }
 
-  // Estilos base para los enlaces
-  const linkBase = 'px-5 py-3 rounded-xl text-base font-medium transition-all duration-300 hover:scale-105'
+  const linkBase = 'px-4 py-3 rounded-xl text-sm font-medium transition-all duration-300'
   const isHome = location.pathname === '/'
-  
   const link = (active) =>
     active 
-      ? `${linkBase} text-brand-600 bg-brand-50 dark:bg-neutral-800 shadow-md border border-brand-100` 
-      : `${linkBase} text-neutral-700 dark:text-neutral-300 hover:bg-brand-50 dark:hover:bg-neutral-800 hover:shadow-lg border border-transparent`
+      ? `${linkBase} text-brand-600 bg-brand-50 dark:bg-neutral-800` 
+      : `${linkBase} text-neutral-600 dark:text-neutral-300 hover:bg-brand-50 dark:hover:bg-neutral-800`
 
-  // Definición de anchors
   const anchors = {
     servicios: "/#servicios",
+
+    // Rutas solicitadas
     limpieza: "/servicios/limpieza",
     ortodonciaAvanzada: "/servicios/ortodoncia",
     resinas: "/servicios/resinas",
@@ -100,6 +88,8 @@ export default function Navbar() {
     odontopediatria: "/servicios/odontopediatria",
     periodoncia: "/servicios/periodoncia",
     endodoncia: "/servicios/endodoncia",
+
+    // Otros anchors existentes
     antesDespues: "/#antes-despues",
     agendar: "/#agendar",
     testimonios: "/#testimonios",
@@ -108,47 +98,37 @@ export default function Navbar() {
   }
 
   return (
-    <header 
-      className={`sticky top-0 z-50 backdrop-blur-xl transition-all duration-500 ${
-        scrolled 
-          ? 'bg-white/95 shadow-2xl border-b border-neutral-200/80 dark:border-neutral-800/80' 
-          : 'bg-white/90 dark:bg-neutral-950/70'
-      }`}
-    >
-      {/* Barra de gradiente superior */}
-      <div className="w-full h-1.5 bg-gradient-to-r from-blue-500 via-purple-500 to-teal-500 shadow-lg"></div>
-      
-      <nav className="max-w-8xl mx-auto px-6 lg:px-8">
-        <div className="flex items-center justify-between h-20">
-          
-          {/* Logo - Izquierda */}
+    <header className={`sticky top-0 z-50 backdrop-blur-md transition-all duration-500 ${
+      scrolled 
+        ? 'bg-white/95 shadow-lg border-b border-neutral-200 dark:border-neutral-800' 
+        : 'bg-white/80 dark:bg-neutral-950/60'
+    }`}>
+      <div className="w-full h-1 bg-gradient-to-r from-blue-500 via-purple-500 to-teal-500"></div>
+      <nav className="container px-10">
+        <div className="flex items-center justify-between h-16">
           <Link
             to="/"
-            className="flex items-center gap-3 shrink-0 group"
+            className="flex items-center gap-4 shrink-0 group mr-8"
             aria-label="Ir al inicio"
           >
             <div className="relative">
-              <div className="absolute -top-1 -right-1 w-2.5 h-2.5 bg-green-400 rounded-full animate-pulse shadow-lg shadow-green-400/50"></div>
+              <div className="absolute -top-1 -right-1 w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
               <img
                 src="/images/logo-especialistas-en-salud-bucal.png"
                 alt="Especialistas en salud bucal"
-                className="h-12 w-auto transition-all duration-500 group-hover:scale-110 group-hover:rotate-1"
+                className="h-10 sm:h-12 w-auto transition-transform duration-300 group-hover:scale-105"
                 width="160"
                 height="48"
                 loading="eager"
                 decoding="async"
               />
             </div>
-            <div className="hidden lg:block">
-              <div className="text-lg font-semibold text-brand-600 dark:text-brand-400 bg-gradient-to-r from-brand-600 to-teal-600 bg-clip-text text-transparent">
-                Especialistas en Salud Bucal
-              </div>
+            <div className="hidden sm:block">
+              <div className="text-brand-600 dark:text-neutral-600">Especialistas en Salud Bucal</div>
             </div>
           </Link>
 
-          {/* Navegación desktop - Distribuida */}
-          <div className="hidden lg:flex items-center gap-6 flex-1 justify-center" ref={dropdownRef}>
-            
+          <div className="hidden lg:flex items-center gap-6 text-brand-600" ref={dropdownRef}>
             {/* Dropdown Servicios */}
             <div
               className="relative"
@@ -157,152 +137,118 @@ export default function Navbar() {
             >
               <button
                 onClick={() => setServicesOpen(v => !v)}
-                className={`px-6 py-3 rounded-xl font-semibold flex items-center gap-2 transition-all duration-300 hover:scale-105 ${
-                  servicesOpen 
-                    ? 'bg-green-600 text-white shadow-xl scale-105' 
-                    : 'text-green-700 dark:text-green-400 hover:text-green-800 bg-green-50/80 dark:bg-green-900/30 hover:shadow-lg border border-green-100/50'
-                }`}
+                className={`${link(false)} flex items-center gap-1 ${servicesOpen ? 'bg-brand-6000 dark:bg-neutral-800 text-brand-600' : ''}`}
                 aria-haspopup="menu"
                 aria-expanded={servicesOpen}
               >
                 <span>Servicios</span>
-                <span className={`transform transition-all duration-300 text-sm ${
-                  servicesOpen ? 'rotate-180 scale-110' : ''
-                }`}>
-                  ▼
-                </span>
+                <span className={`transform transition-transform duration-300 ${servicesOpen ? 'rotate-180' : ''}`}>▼</span>
               </button>
 
               {servicesOpen && (
                 <div 
-                  className="absolute left-0 mt-2 w-72 rounded-2xl border border-neutral-200/80 dark:border-neutral-800/80 bg-white/95 dark:bg-neutral-900/95 backdrop-blur-xl shadow-2xl p-4 animate-in fade-in-0 zoom-in-95"
+                  className="absolute left-0 mt-2 w-72 rounded-2xl border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-900 shadow-lg p-3 animate-in fade-in-0 zoom-in-95"
                   ref={dropdownContentRef}
                   onMouseEnter={handleDropdownEnter}
                   onMouseLeave={handleDropdownLeave}
+                  style={{ marginTop: '8px' }}
                 >
-                  <div className="absolute -top-2 left-6 w-4 h-4 bg-white dark:bg-neutral-900 border-t border-l border-neutral-200/80 dark:border-neutral-800/80 transform rotate-45 backdrop-blur-xl"></div>
+                  <div className="absolute -top-2 left-6 w-4 h-4 bg-white dark:bg-neutral-900 border-t border-l border-neutral-200 dark:border-neutral-800 transform rotate-45"></div>
                   
-                  <div className="relative space-y-2 z-10">
-                    <a 
-                      className="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-blue-50 dark:hover:bg-blue-900/30 text-neutral-800 dark:text-neutral-200 hover:text-blue-600 transition-all duration-300 hover:scale-105 group"
-                      href={anchors.servicios}
-                      onClick={() => setServicesOpen(false)}
-                    >
-                      <span className="w-2.5 h-2.5 bg-blue-500 rounded-full group-hover:scale-125 transition-transform"></span>
-                      <span className="font-medium">Vista general</span>
+                  <div className="relative space-y-1 z-10">
+                    <a className="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-blue-50 dark:hover:bg-blue-900/20 text-neutral-700 dark:text-neutral-300 hover:text-blue-600 transition-all group" 
+                       href={anchors.servicios}
+                       onClick={() => setServicesOpen(false)}>
+                      <span className="w-2 h-2 bg-blue-500 rounded-full"></span>
+                      <span>Vista general</span>
                     </a>
 
-                    {/* Lista de servicios */}
-                    {[
-                      { label: 'Limpieza profesional', href: anchors.limpieza, color: 'bg-cyan-500' },
-                      { label: 'Ortodoncia Avanzada', href: anchors.ortodonciaAvanzada, color: 'bg-purple-500' },
-                      { label: 'Resinas y Coronas', href: anchors.resinas, color: 'bg-emerald-500' },
-                      { label: 'Implantes Dentales', href: anchors.implantesDentales, color: 'bg-orange-500' },
-                      { label: 'Protesis Dental', href: anchors.protesisDental, color: 'bg-amber-500' },
-                      { label: 'Odontologia Estética', href: anchors.odontologiaEstetica, color: 'bg-pink-500' },
-                      { label: 'Cirugia maxilofacial', href: anchors.cirugiaMaxilofacial, color: 'bg-slate-500' },
-                      { label: 'Odontopediatria', href: anchors.odontopediatria, color: 'bg-sky-500' },
-                      { label: 'Periodoncia', href: anchors.periodoncia, color: 'bg-teal-500' },
-                      { label: 'Endodoncia', href: anchors.endodoncia, color: 'bg-red-500' },
-                    ].map((item, index) => (
-                      <a 
-                        key={index}
-                        className="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-gradient-to-r hover:from-white/50 hover:to-transparent dark:hover:from-neutral-800/50 text-neutral-700 dark:text-neutral-300 transition-all duration-300 hover:scale-105 group"
-                        href={item.href} 
-                        onClick={() => setServicesOpen(false)}
-                      >
-                        <span className={`w-2.5 h-2.5 ${item.color} rounded-full group-hover:scale-125 transition-transform shadow-sm`}></span>
-                        <span className="font-medium">{item.label}</span>
-                      </a>
-                    ))}
+                    {/* Lista solicitada */}
+                    <a className="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-cyan-50 dark:hover:bg-cyan-900/20 text-neutral-700 dark:text-neutral-300 hover:text-cyan-600 transition-all" href={anchors.limpieza} onClick={() => setServicesOpen(false)}>
+                      <span className="w-2 h-2 bg-cyan-500 rounded-full"></span>
+                      <span>Limpieza profesional</span>
+                    </a>
+                    <a className="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-purple-50 dark:hover:bg-purple-900/20 text-neutral-700 dark:text-neutral-300 hover:text-purple-600 transition-all" href={anchors.ortodonciaAvanzada} onClick={() => setServicesOpen(false)}>
+                      <span className="w-2 h-2 bg-purple-500 rounded-full"></span>
+                      <span>Ortodoncia Avanzada</span>
+                    </a>
+                    <a className="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-emerald-50 dark:hover:bg-emerald-900/20 text-neutral-700 dark:text-neutral-300 hover:text-emerald-600 transition-all" href={anchors.resinas} onClick={() => setServicesOpen(false)}>
+                      <span className="w-2 h-2 bg-emerald-500 rounded-full"></span>
+                      <span>Resinas y Coronas</span>
+                    </a>
+                    <a className="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-orange-50 dark:hover:bg-orange-900/20 text-neutral-700 dark:text-neutral-300 hover:text-orange-600 transition-all" href={anchors.implantesDentales} onClick={() => setServicesOpen(false)}>
+                      <span className="w-2 h-2 bg-orange-500 rounded-full"></span>
+                      <span>Implantes Dentales</span>
+                    </a>
+                    <a className="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-amber-50 dark:hover:bg-amber-900/20 text-neutral-700 dark:text-neutral-300 hover:text-amber-600 transition-all" href={anchors.protesisDental} onClick={() => setServicesOpen(false)}>
+                      <span className="w-2 h-2 bg-amber-500 rounded-full"></span>
+                      <span>Protesis Dental</span>
+                    </a>
+                    <a className="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-pink-50 dark:hover:bg-pink-900/20 text-neutral-700 dark:text-neutral-300 hover:text-pink-600 transition-all" href={anchors.odontologiaEstetica} onClick={() => setServicesOpen(false)}>
+                      <span className="w-2 h-2 bg-pink-500 rounded-full"></span>
+                      <span>Odontologia Estética</span>
+                    </a>
+                    <a className="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-900/20 text-neutral-700 dark:text-neutral-300 hover:text-slate-600 transition-all" href={anchors.cirugiaMaxilofacial} onClick={() => setServicesOpen(false)}>
+                      <span className="w-2 h-2 bg-slate-500 rounded-full"></span>
+                      <span>Cirugia maxilofacial</span>
+                    </a>
+                    <a className="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-sky-50 dark:hover:bg-sky-900/20 text-neutral-700 dark:text-neutral-300 hover:text-sky-600 transition-all" href={anchors.odontopediatria} onClick={() => setServicesOpen(false)}>
+                      <span className="w-2 h-2 bg-sky-500 rounded-full"></span>
+                      <span>Odontopediatria</span>
+                    </a>
+                    <a className="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-teal-50 dark:hover:bg-teal-900/20 text-neutral-700 dark:text-neutral-300 hover:text-teal-600 transition-all" href={anchors.periodoncia} onClick={() => setServicesOpen(false)}>
+                      <span className="w-2 h-2 bg-teal-500 rounded-full"></span>
+                      <span>Perodoncia</span>
+                    </a>
+                    <a className="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-teal-50 dark:hover:bg-teal-900/20 text-neutral-700 dark:text-neutral-300 hover:text-teal-600 transition-all" href={anchors.periodoncia} onClick={() => setServicesOpen(false)}>
+                      <span className="w-2 h-2 bg-teal-500 rounded-full"></span>
+                      <span>Endodoncia</span>
+                    </a>
                   </div>
                 </div>
               )}
             </div>
 
-            {/* Enlaces principales */}
-            <a className={link(isHome)} href={anchors.antesDespues}>
-              Antes/Después
-            </a>
-            
-            <a className={link(isHome)} href={anchors.agendar}>
-              Agendar
-            </a>
-            
-            <a className={link(isHome)} href={anchors.testimonios}>
-              Testimonios
-            </a>
-            
-            <a className={link(isHome)} href={anchors.ubicacion}>
-              Ubicación
-            </a>
-            
-            <a className={link(isHome)} href={anchors.faq}>
-              FAQ
-            </a>
+            <a className={link(isHome)} href={anchors.antesDespues}>Antes/Después</a>
+            <a className={link(isHome)} href={anchors.agendar}>Agendar</a>
+            <a className={link(isHome)} href={anchors.testimonios}>Testimonios</a>
+            <a className={link(isHome)} href={anchors.ubicacion}>Ubicación</a>
+            <a className={link(isHome)} href={anchors.faq}>FAQ</a>
+
+            <Link to="/citas" className="btn btn-primary ml-4 px-6 py-3 whitespace-nowrap">Reservar cita</Link>
+            <div className="ml-2">
+              <ThemeToggle />
+            </div>
           </div>
 
-          {/* CTA y tema - Derecha */}
-          <div className="hidden lg:flex items-center gap-4">
-            <Link 
-              to="/citas" 
-              className="bg-gradient-to-r from-green-500 to-teal-500 hover:from-green-600 hover:to-teal-600 text-white font-semibold px-8 py-3 rounded-xl shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 whitespace-nowrap"
-            >
-              Reservar cita
-            </Link>
-            
+          <div className="lg:hidden flex items-center gap-4">
+            <Link to="/citas" className="btn btn-primary px-4 py-2 text-sm whitespace-nowrap">Reservar</Link>
             <ThemeToggle />
-          </div>
-
-          {/* Navegación móvil */}
-          <div className="lg:hidden flex items-center gap-3">
-            <Link 
-              to="/citas" 
-              className="bg-gradient-to-r from-green-500 to-teal-500 text-white font-semibold px-4 py-2.5 rounded-lg shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 text-sm whitespace-nowrap"
-            >
-              Reservar
-            </Link>
-            
-            <ThemeToggle />
-            
             <button
-              className="p-2.5 rounded-xl hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-all duration-300 hover:shadow-lg"
+              className="p-2 rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors"
               onClick={() => setMobileOpen(v => !v)}
               aria-label="Abrir menú"
             >
-              <div className={`w-6 h-6 relative transition-transform duration-500 ${
-                mobileOpen ? 'rotate-180' : ''
-              }`}>
-                <span className={`absolute top-2.5 left-0 w-6 h-0.5 bg-neutral-700 dark:bg-neutral-300 rounded-full transition-all duration-500 ${
-                  mobileOpen ? 'rotate-45 translate-y-0 scale-125' : '-translate-y-1.5'
-                }`}></span>
-                
-                <span className={`absolute top-2.5 left-0 w-6 h-0.5 bg-neutral-700 dark:bg-neutral-300 rounded-full transition-all duration-300 ${
-                  mobileOpen ? 'opacity-0 scale-0' : 'opacity-100 scale-100'
-                }`}></span>
-                
-                <span className={`absolute top-2.5 left-0 w-6 h-0.5 bg-neutral-700 dark:bg-neutral-300 rounded-full transition-all duration-500 ${
-                  mobileOpen ? '-rotate-45 translate-y-0 scale-125' : 'translate-y-1.5'
-                }`}></span>
+              <div className={`w-6 h-6 relative transition-transform duration-300 ${mobileOpen ? 'rotate-90' : ''}`}>
+                <span className={`absolute top-2 left-0 w-6 h-0.5 bg-neutral-600 dark:bg-neutral-300 rounded transition-all ${mobileOpen ? 'rotate-45 translate-y-0' : '-translate-y-1'}`}></span>
+                <span className={`absolute top-2 left-0 w-6 h-0.5 bg-neutral-600 dark:bg-neutral-300 rounded transition-all ${mobileOpen ? 'opacity-0' : 'opacity-100'}`}></span>
+                <span className={`absolute top-2 left-0 w-6 h-0.5 bg-neutral-600 dark:bg-neutral-300 rounded transition-all ${mobileOpen ? '-rotate-45 translate-y-0' : 'translate-y-1'}`}></span>
               </div>
             </button>
           </div>
         </div>
       </nav>
 
-      {/* Menú móvil desplegable */}
       {mobileOpen && (
-        <div className="lg:hidden border-t border-neutral-200/80 dark:border-neutral-800/80 bg-white/95 dark:bg-neutral-950/95 backdrop-blur-xl shadow-2xl">
-          <div className="max-w-8xl mx-auto px-6 py-6 animate-in fade-in-0 slide-in-from-top-4 duration-500">
-            <div className="space-y-4">
-              
+        <div className="lg:hidden border-t border-neutral-200 dark:border-neutral-800 bg-white/95 dark:bg-neutral-950/95 backdrop-blur-md">
+          <div className="container mx-auto px-4 py-4 animate-in fade-in-0 slide-in-from-top-2">
+            <div className="grid gap-3">
               <details className="group">
-                <summary className="cursor-pointer list-none flex items-center justify-between px-6 py-4 bg-white/60 dark:bg-neutral-800/60 rounded-xl border border-neutral-200/60 dark:border-neutral-700/60 hover:shadow-lg transition-all duration-300">
-                  <span className="font-semibold text-green-800 dark:text-green-400">Servicios</span>
-                  <span className="transform transition-transform duration-500 group-open:rotate-180 text-green-600 dark:text-green-400">▼</span>
+                <summary className={`${link(false)} cursor-pointer list-none flex items-center justify-between`}>
+                  <span>Servicios</span>
+                  <span className="transform transition-transform group-open:rotate-180">▼</span>
                 </summary>
-                
-                <div className="pl-5 mt-4 space-y-3 border-l-2 border-green-200 dark:border-green-800 ml-4">
+                <div className="pl-4 mt-3 grid gap-2 border-l-2 border-neutral-200 dark:border-neutral-700 ml-3">
                   {[
                     { label: 'Vista general', href: anchors.servicios, color: 'bg-blue-500' },
                     { label: 'Limpieza profesional', href: anchors.limpieza, color: 'bg-cyan-500' },
@@ -313,46 +259,29 @@ export default function Navbar() {
                     { label: 'Odontologia Estética', href: anchors.odontologiaEstetica, color: 'bg-pink-500' },
                     { label: 'Cirugia maxilofacial', href: anchors.cirugiaMaxilofacial, color: 'bg-slate-500' },
                     { label: 'Odontopediatria', href: anchors.odontopediatria, color: 'bg-sky-500' },
-                    { label: 'Periodoncia', href: anchors.periodoncia, color: 'bg-teal-500' },
-                    { label: 'Endodoncia', href: anchors.endodoncia, color: 'bg-red-500' },
+                    { label: 'Ortodoncia', href: anchors.ortodonciaGeneral, color: 'bg-indigo-500' },
+                    { label: 'Implantologia', href: anchors.implantologia, color: 'bg-red-500' },
+                    { label: 'Perodoncia', href: anchors.periodoncia, color: 'bg-teal-500' },
+                    { label: 'Ortodoncia', href: anchors.ortodonciaGeneral, color: 'bg-indigo-500' }, // repetido a solicitud
                   ].map((item, index) => (
-                    <a 
-                      key={index} 
-                      className="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-gradient-to-r hover:from-blue-50/50 hover:to-transparent dark:hover:from-blue-900/20 text-neutral-700 dark:text-neutral-300 transition-all duration-300 hover:scale-105 group"
-                      href={item.href} 
-                      onClick={() => setMobileOpen(false)}
-                    >
-                      <span className={`w-2.5 h-2.5 ${item.color} rounded-full group-hover:scale-125 transition-transform shadow-sm`}></span>
-                      <span className="font-medium">{item.label}</span>
+                    <a key={index} 
+                       className="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-blue-50 dark:hover:bg-blue-900/20 text-neutral-700 dark:text-neutral-300 transition-all"
+                       href={item.href} 
+                       onClick={() => setMobileOpen(false)}>
+                      <span className={`w-2 h-2 ${item.color} rounded-full`}></span>
+                      <span>{item.label}</span>
                     </a>
                   ))}
                 </div>
               </details>
 
-              {/* Enlaces móviles */}
-              {[
-                { label: 'Antes/Después', href: anchors.antesDespues },
-                { label: 'Agendar', href: anchors.agendar },
-                { label: 'Testimonios', href: anchors.testimonios },
-                { label: 'Ubicación', href: anchors.ubicacion },
-                { label: 'FAQ', href: anchors.faq },
-              ].map((item, index) => (
-                <a 
-                  key={index}
-                  className="block px-6 py-4 text-center font-medium bg-white/60 dark:bg-neutral-800/60 rounded-xl border border-neutral-200/60 dark:border-neutral-700/60 hover:shadow-lg transition-all duration-300 hover:scale-105 text-neutral-700 dark:text-neutral-300"
-                  href={item.href} 
-                  onClick={() => setMobileOpen(false)}
-                >
-                  {item.label}
-                </a>
-              ))}
+              <a className={link(isHome)} href={anchors.antesDespues} onClick={() => setMobileOpen(false)}>Antes/Después</a>
+              <a className={link(isHome)} href={anchors.agendar} onClick={() => setMobileOpen(false)}>Agendar</a>
+              <a className={link(isHome)} href={anchors.testimonios} onClick={() => setMobileOpen(false)}>Testimonios</a>
+              <a className={link(isHome)} href={anchors.ubicacion} onClick={() => setMobileOpen(false)}>Ubicación</a>
+              <a className={link(isHome)} href={anchors.faq} onClick={() => setMobileOpen(false)}>FAQ</a>
 
-              {/* CTA móvil */}
-              <Link 
-                to="/citas" 
-                className="block bg-gradient-to-r from-green-500 to-teal-500 hover:from-green-600 hover:to-teal-600 text-white font-semibold px-8 py-4 rounded-xl shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 text-center mt-4"
-                onClick={() => setMobileOpen(false)}
-              >
+              <Link to="/citas" className="btn btn-primary mt-4 text-center py-3" onClick={() => setMobileOpen(false)}>
                 Reservar cita
               </Link>
             </div>
