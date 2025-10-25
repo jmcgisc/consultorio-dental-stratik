@@ -38,7 +38,7 @@ export default function StickyCta() {
             </a>
             
             <a 
-              href="tel:+525500000000" 
+              href="tel:+525555770687" 
               className="px-4 py-2 bg-neutral-100 dark:bg-neutral-800 text-neutral-700 dark:text-neutral-300 font-medium rounded-lg hover:bg-neutral-200 dark:hover:bg-neutral-700 transition-colors duration-200 border border-neutral-300 dark:border-neutral-600"
               aria-label="Llamar a la clínica"
             >
