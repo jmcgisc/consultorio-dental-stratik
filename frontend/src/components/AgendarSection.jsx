@@ -137,7 +137,7 @@ export default function AgendarSection() {
     <section id="agendar" className="container-px py-16 bg-gray-50 dark:bg-gray-950">
       <div className="grid lg:grid-cols-2 gap-10 items-start">
         <div>
-          <h2 className="text-3xl font-bold text-gray-900 dark:text-white">Agendar en 3 pasos</h2>
+          <h2 className="text-3xl font-bold text-gray-900 dark:text-white">Contáctanos en 3 pasos</h2>
           <p className="mt-2 text-gray-600 dark:text-gray-300">
             Rápido, sencillo y con confirmación por WhatsApp o llamada.
           </p>
@@ -194,7 +194,7 @@ export default function AgendarSection() {
               <input
                 name="telefono"
                 inputMode="tel"
-                placeholder="+52 55 5577 0687"
+                placeholder="+52 55 5555 5555"
                 required
                 className="mt-1 w-full rounded-xl border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-white px-3 py-2 outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent placeholder-gray-500 dark:placeholder-gray-400"
               />

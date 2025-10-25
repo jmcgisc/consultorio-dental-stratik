@@ -108,9 +108,9 @@ export default function HeroVideoDentista() {
           </p>
 
           <div className="mt-8 flex flex-wrap gap-3">
-            <Link to="/citas" className="btn btn-primary">Agendar cita</Link>
+            {/* <Link to="/#agendar" className="btn btn-primary">Agendar cita</Link> */}
             <a
-              className="btn btn-ghost"
+              className="btn btn-primary"
               href="https://wa.me/5215560910802?text=Quiero%20agendar%20una%20cita"
               target="_blank" rel="noreferrer"
             >

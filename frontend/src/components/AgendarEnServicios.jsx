@@ -305,7 +305,7 @@ export default function AgendarEnServicios() {
                   <span className="text-2xl">🏥</span>
                   <div>
                     <div className="font-semibold text-neutral-800 dark:text-neutral-100">Lun–Vie</div>
-                    <div className="text-sm text-neutral-600 dark:text-neutral-400">9:00–19:00</div>
+                    <div className="text-sm text-neutral-600 dark:text-neutral-400">10:00–14:00 - 16:00 - 20:00</div>
                   </div>
                 </div>
                 
@@ -313,7 +313,7 @@ export default function AgendarEnServicios() {
                   <span className="text-2xl">🌞</span>
                   <div>
                     <div className="font-semibold text-neutral-800 dark:text-neutral-100">Sábados</div>
-                    <div className="text-sm text-neutral-600 dark:text-neutral-400">9:00–14:00</div>
+                    <div className="text-sm text-neutral-600 dark:text-neutral-400">9:00–15:00</div>
                   </div>
                 </div>
                 
@@ -321,7 +321,7 @@ export default function AgendarEnServicios() {
                   <span className="text-2xl">📞</span>
                   <div>
                     <div className="font-semibold text-neutral-800 dark:text-neutral-100">Teléfono</div>
-                    <div className="text-sm text-neutral-600 dark:text-neutral-400">(55) 0000 0000</div>
+                    <div className="text-sm text-neutral-600 dark:text-neutral-400">(+52) 55 5577 0687</div>
                   </div>
                 </div>
                 
@@ -329,7 +329,7 @@ export default function AgendarEnServicios() {
                   <span className="text-2xl">📍</span>
                   <div>
                     <div className="font-semibold text-neutral-800 dark:text-neutral-100">Dirección</div>
-                    <div className="text-sm text-neutral-600 dark:text-neutral-400">Av. Principal 123, CDMX</div>
+                    <div className="text-sm text-neutral-600 dark:text-neutral-400">Joyas 120, letra C, col. Estrella, Gustavo A. Madero, 07810 Ciudad de México, CDMX • Esquina con Calle Turquesa</div>
                   </div>
                 </div>
               </div>

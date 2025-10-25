@@ -143,12 +143,12 @@ const DATA = {
         { src: "/images/servicios/limpieza-2.jpg", alt: "Pulido dental" },
         { src: "/images/servicios/limpieza-3.jpg", alt: "Consejos de cepillado" }
       ],
-      beforeAfter: {
-        before: "/images/servicios/limpieza-before.jpg",
-        after:  "/images/servicios/limpieza-after.jpg",
-        labelBefore: "Antes",
-        labelAfter:  "Después"
-      },
+      // beforeAfter: {
+      //   before: "/images/servicios/limpieza-before.jpg",
+      //   after:  "/images/servicios/limpieza-after.jpg",
+      //   labelBefore: "Antes",
+      //   labelAfter:  "Después"
+      // },
       videos: [
         {
           mp4:  "/videos/servicios/limpieza-profilaxis.mp4",
@@ -197,9 +197,9 @@ const DATA = {
         { src: "/images/servicios/ortodoncia-1.jpg", alt: "Alineadores" },
         { src: "/images/servicios/ortodoncia-2.jpg", alt: "Brackets estéticos" }
       ],
-      beforeAfter: {
-        before: "/images/servicios/ortodoncia-before.jpg",
-        after:  "/images/servicios/ortodoncia-after.jpg",
+     beforeAfter: {
+        before: "/images/servicios/implantologia-before.jpg",
+        after:  "/images/servicios/implantologia-after.jpg"
       },
       videos: [
         { mp4: "/videos/servicios/ortodoncia.mp4", poster: "/images/servicios/implantes-2.jpg", caption: "Colocación de brackets (animación)" }
@@ -240,7 +240,7 @@ const DATA = {
     media: {
       hero: { type: "video", mp4: "/videos/servicios/resinas_coronas.mp4", poster: "/images/servicios/implantes-hero.jpg", image: "/images/servicios/implantes-hero.jpg" },
       gallery: [{ src: "/images/servicios/resinas-1.jpg" }, { src: "/images/servicios/resinas-2.jpg" }],
-      beforeAfter: { before: "/images/servicios/resinas-before.jpg", after: "/images/servicios/resinas-after.jpg" },
+      // beforeAfter: { before: "/images/servicios/resinas-before.jpg", after: "/images/servicios/resinas-after.jpg" },
       videos: [
         { mp4: "/videos/servicios/resinas_coronas.mp4", poster: "/images/servicios/implantes-2.jpg", caption: "Restauración estética (demo)" }
       ]
@@ -284,7 +284,7 @@ const DATA = {
     media: {
       hero: { type: "video", mp4: "/videos/servicios/implantes-hero.mp4", poster: "/images/servicios/implantes-hero.jpg", image: "/images/servicios/implantes-hero.jpg" },
       gallery: [{ src: "/images/servicios/implantes-1.jpg" }, { src: "/images/servicios/implantes-2.jpg" }],
-      beforeAfter: { before: "/images/servicios/implantes-before.jpg", after: "/images/servicios/implantes-after.jpg" },
+      // beforeAfter: { before: "/images/servicios/implantes-before.jpg", after: "/images/servicios/implantes-after.jpg" },
       videos: [{ mp4: "/videos/servicios/video-implantes.mp4", poster: "/images/servicios/implantes-3f.jpg", caption: "Planeación 3D (demo)" }]
     }
   },
@@ -387,10 +387,10 @@ const DATA = {
         { src: "/images/servicios/odontologia-1.jpg", alt: "Carillas" },
         { src: "/images/servicios/odontologia-2.jpg", alt: "Blanqueamiento" }
       ],
-      beforeAfter: {
-        before: "/images/servicios/estetica-before.jpeg",
-        after:  "/images/servicios/estetica-after.jpeg"
-      },
+      // beforeAfter: {
+      //   before: "/images/servicios/estetica-before.jpeg",
+      //   after:  "/images/servicios/estetica-after.jpeg"
+      // },
       videos: []
     }
   },
@@ -426,7 +426,7 @@ const DATA = {
       "Indicaciones y control"
     ],
     faq: [
-      ["¿Me voy a hinchar?","Puede haber inflamación leve-moderada, disminuye en 48–72 h con cuidados."],
+      // ["¿Me voy a hinchar?","Puede haber inflamación leve-moderada, disminuye en 48–72 h con cuidados."],
       ["¿Puedo trabajar al día siguiente?","Depende del caso y el tipo de cirugía; lo indicamos en consulta."]
     ],
     media: {
@@ -569,10 +569,10 @@ const DATA = {
         { src: "/images/servicios/implantologia-1.jpg" },
         { src: "/images/servicios/implantologia-2.jpg" }
       ],
-      beforeAfter: {
-        before: "/images/servicios/implantologia-before.jpg",
-        after:  "/images/servicios/implantologia-after.jpg"
-      },
+      // beforeAfter: {
+      //   before: "/images/servicios/implantologia-before.jpg",
+      //   after:  "/images/servicios/implantologia-after.jpg"
+      // },
       videos: []
     }
   },

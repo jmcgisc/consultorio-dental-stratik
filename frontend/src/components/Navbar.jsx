@@ -91,7 +91,6 @@ export default function Navbar() {
 
     // Otros anchors existentes
     antesDespues: "/#antes-despues",
-    agendar: "/#agendar",
     testimonios: "/#testimonios",
     ubicacion: "/#ubicacion",
     faq: "/#faq",
@@ -209,20 +208,19 @@ export default function Navbar() {
               )}
             </div>
 
-            <a className={link(isHome)} href={anchors.antesDespues}>Antes/Después</a>
-            <a className={link(isHome)} href={anchors.agendar}>Agendar</a>
+            <a className={link(isHome)} href={anchors.antesDespues}>Antes/Después</a> 
             <a className={link(isHome)} href={anchors.testimonios}>Testimonios</a>
             <a className={link(isHome)} href={anchors.ubicacion}>Ubicación</a>
             <a className={link(isHome)} href={anchors.faq}>FAQ</a>
 
-            <Link to="/citas" className="btn btn-primary ml-4 px-6 py-3 whitespace-nowrap">Reservar cita</Link>
+            <Link to="/#agendar" className="btn btn-primary ml-4 px-6 py-3 whitespace-nowrap">Reservar cita</Link>
             <div className="ml-2">
               <ThemeToggle />
             </div>
           </div>
 
           <div className="lg:hidden flex items-center gap-4">
-            <Link to="/citas" className="btn btn-primary px-4 py-2 text-sm whitespace-nowrap">Reservar</Link>
+            <Link to="/#agendar" className="btn btn-primary px-4 py-2 text-sm whitespace-nowrap">Reservar</Link>
             <ThemeToggle />
             <button
               className="p-2 rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors"
@@ -275,8 +273,7 @@ export default function Navbar() {
                 </div>
               </details>
 
-              <a className={link(isHome)} href={anchors.antesDespues} onClick={() => setMobileOpen(false)}>Antes/Después</a>
-              <a className={link(isHome)} href={anchors.agendar} onClick={() => setMobileOpen(false)}>Agendar</a>
+              <a className={link(isHome)} href={anchors.antesDespues} onClick={() => setMobileOpen(false)}>Antes/Después</a> 
               <a className={link(isHome)} href={anchors.testimonios} onClick={() => setMobileOpen(false)}>Testimonios</a>
               <a className={link(isHome)} href={anchors.ubicacion} onClick={() => setMobileOpen(false)}>Ubicación</a>
               <a className={link(isHome)} href={anchors.faq} onClick={() => setMobileOpen(false)}>FAQ</a>
