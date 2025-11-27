@@ -1,47 +1,73 @@
-import { Routes, Route } from "react-router-dom"
-import useHashScroll from "./hooks/useHashScroll.js"
-import Navbar from "./components/Navbar.jsx"
-import PromoBanner from "./components/PromoBanner.jsx"
-import StickyCta from "./components/StickyCta.jsx"
+// import { Routes, Route } from "react-router-dom"
+// import useHashScroll from "./hooks/useHashScroll.js"
+// import Navbar from "./components/Navbar.jsx"
+// import PromoBanner from "./components/PromoBanner.jsx"
+// import StickyCta from "./components/StickyCta.jsx"
 
-import Footer from "./components/Footer.jsx"          // ← nuevo
-import Home from "./pages/Home.jsx"
-import Servicios from "./pages/Servicios.jsx"
-// import Citas from "./pages/Citas.jsx"
-// import Contacto from "./pages/Contacto.jsx"
-import Privacidad from "./pages/Privacidad.jsx"      // ← nuevo
-import Terminos from "./pages/Terminos.jsx"          // ← nuevo
-import NotFound from "./pages/NotFound.jsx"
-import TrustStrip from "./components/TrustStrip.jsx" 
-import ServicioDetalle from "./pages/ServicioDetalle.jsx"
-import AvisoPrivacidad from "./pages/AvisoPrivacidad.jsx"
-import Nosotros from "./pages/Nosotros.jsx"
+// import Footer from "./components/Footer.jsx"         
+// import Home from "./pages/Home.jsx"
+// import Servicios from "./pages/Servicios.jsx"
 
-export default function App() {
-  useHashScroll()
+// import Privacidad from "./pages/Privacidad.jsx"     
+// import Terminos from "./pages/Terminos.jsx"         
+// import NotFound from "./pages/NotFound.jsx"
+// import TrustStrip from "./components/TrustStrip.jsx" 
+// import ServicioDetalle from "./pages/ServicioDetalle.jsx"
+// import AvisoPrivacidad from "./pages/AvisoPrivacidad.jsx"
+// import Nosotros from "./pages/Nosotros.jsx"
+
+// export default function App() {
+//   useHashScroll()
+//   return (
+//     <div className="min-h-screen flex flex-col">
+//       <Navbar />      
+//       <TrustStrip />   
+//       <PromoBanner />  
+
+//       <main className="flex-1">
+//         <Routes>
+//           <Route path="/" element={<Home />} />
+//           <Route path="/servicios" element={<Servicios />} />
+//           <Route path="/politica-privacidad" element={<Privacidad />} />
+//           <Route path="/terminos-servicio" element={<Terminos />} />
+//           <Route path="*" element={<NotFound />} />
+//           <Route path="/servicios/:slug" element={<ServicioDetalle />} />
+//           <Route path="/politica-privacidad" element={<AvisoPrivacidad />} />
+//           <Route path="/nosotros" element={<Nosotros />} />
+
+//         </Routes>
+//       </main>
+//       <Footer />
+//       <StickyCta />     
+//     </div>
+//   )
+// }
+
+// frontend/src/App.jsx
+import React from 'react';
+import './App.css'; // Asegúrate de que tienes un archivo CSS para estilos globales
+
+function App() {
   return (
-    <div className="min-h-screen flex flex-col">
-      <Navbar />      
-      <TrustStrip />   {/* ← aquí */}
-      <PromoBanner />   {/* ← banner superior */} 
-
-      <main className="flex-1">
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/servicios" element={<Servicios />} />
-          {/* <Route path="/citas" element={<Citas />} />
-          <Route path="/contacto" element={<Contacto />} /> */}
-          <Route path="/politica-privacidad" element={<Privacidad />} />
-          <Route path="/terminos-servicio" element={<Terminos />} />
-          <Route path="*" element={<NotFound />} />
-          <Route path="/servicios/:slug" element={<ServicioDetalle />} />
-          <Route path="/politica-privacidad" element={<AvisoPrivacidad />} />
-          <Route path="/nosotros" element={<Nosotros />} />
-
-        </Routes>
+    <div className="construction-page">
+      <header className="construction-header">
+        <h1>Consultorio Dental Dr. Sonrisas</h1>
+        <h2>Sitio Web en Construcción</h2>
+        <p>¡Volvemos pronto con una web reluciente!</p>
+      </header>
+      <main className="construction-content">
+        <img
+          src="/images/sitio-en-construccion-dental.jpg" // Ruta relativa a la carpeta 'public'
+          alt="Sitio web en construcción - Consultorio Dental"
+          className="construction-image"
+        />
+        <p className="contact-info">Para citas o información, por favor contáctanos al [Tu Número de Teléfono] o [Tu Email].</p>
       </main>
-      <Footer />
-      <StickyCta />     {/* ← CTA pegajoso al fondo */}
+      <footer className="construction-footer">
+        {/* Opcional: Algún texto de copyright o redes sociales */}
+      </footer>
     </div>
-  )
+  );
 }
+
+export default App;
