@@ -49,20 +49,14 @@ import './App.css'; // Asegúrate de que tienes un archivo CSS para estilos glob
 
 function App() {
   return (
-    <div className="construction-page">
-      <header className="construction-header">
-        <h1>Consultorio Dental Dr. Sonrisas</h1>
-        <h2>Sitio Web en Construcción</h2>
-        <p>¡Volvemos pronto con una web reluciente!</p>
-      </header>
+    <div className="construction-page ">
       <main className="construction-content">
         <img
           src="/images/sitio-en-construccion-dental.jpg" // Ruta relativa a la carpeta 'public'
           alt="Sitio web en construcción - Consultorio Dental"
-          className="construction-image"
+          className="construction-image  "
         />
-        <p className="contact-info">Para citas o información, por favor contáctanos al [Tu Número de Teléfono] o [Tu Email].</p>
-      </main>
+         </main>
       <footer className="construction-footer">
         {/* Opcional: Algún texto de copyright o redes sociales */}
       </footer>
